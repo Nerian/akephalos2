@@ -7,7 +7,7 @@
 class Capybara::Driver::Akephalos < Capybara::Driver::Base
 
   # Akephalos-specific implementation for Capybara's Node class.
-  class Node < Capybara::Node
+  class Node < Capybara::Driver::Node
 
     # @api capybara
     # @param [String] name attribute name
