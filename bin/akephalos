@@ -67,7 +67,7 @@ else
     jruby_stdlib = JRubyJars.stdlib_jar_path
 
     java_args = [
-      "-Xmx128M",
+      "-Xmx512M",
       "-cp", [JRubyJars.core_jar_path, JRubyJars.stdlib_jar_path].join(":"),
       "org.jruby.Main"
     ]
