@@ -29,10 +29,14 @@ else
       # @return [true/false] whether to raise errors on javascript failures
       attr_reader :validate_scripts
 
+      # @return [true/false] whether to ignore insecure ssl certificates
+      attr_reader :use_insecure_ssl
+
       # The default configuration options for a new Client.
       DEFAULT_OPTIONS = {
         :browser => :firefox_3_6,
-        :validate_scripts => true
+        :validate_scripts => true,
+        :use_insecure_ssl => false
       }
 
       # Map of browser version symbols to their HtmlUnit::BrowserVersion
@@ -58,11 +62,13 @@ else
         @_client = java.util.concurrent.FutureTask.new do
           client = HtmlUnit::WebClient.new(browser_version)
 
-          Filter.new(client)
           client.setThrowExceptionOnFailingStatusCode(false)
           client.setAjaxController(HtmlUnit::NicelyResynchronizingAjaxController.new)
           client.setCssErrorHandler(HtmlUnit::SilentCssErrorHandler.new)
           client.setThrowExceptionOnScriptError(validate_scripts)
+          client.setUseInsecureSSL(use_insecure_ssl)
+
+          Filter.new(client)
           client
         end
         Thread.new { @_client.run }
@@ -124,6 +130,11 @@ else
         !!validate_scripts
       end
 
+      # @return [true, false] whether to ignore insecure ssl certificates 
+      def use_insecure_ssl?
+        !!use_insecure_ssl
+      end
+
       # Merges the DEFAULT_OPTIONS with those provided to initialize the Client
       # state, namely, its browser version and whether it should
       # validate scripts.
@@ -134,6 +145,7 @@ else
 
         @browser_version  = BROWSER_VERSIONS.fetch(options.delete(:browser))
         @validate_scripts = options.delete(:validate_scripts)
+        @use_insecure_ssl = options.delete(:use_insecure_ssl)
       end
 
       private

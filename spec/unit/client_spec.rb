@@ -45,4 +45,24 @@ describe Akephalos::Client, :platform => :jruby do
 
   end
 
+  context "using insecure ssl verification" do
+
+    it "defaults to not ignoring insecure ssl certificates" do
+      Akephalos::Client.new.use_insecure_ssl?.should be_false
+    end
+
+    it "can be configured to ignore insecure ssl certificates" do
+      Akephalos::Client.new(
+        :use_insecure_ssl => true
+      ).use_insecure_ssl?.should be_true
+    end
+    
+    it "configures HtmlUnit" do
+      pending "how do we check this?"
+    end
+
+  end
+  
+
+
 end
