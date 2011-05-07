@@ -30,7 +30,7 @@ module Akephalos
 
       server_port = start!
 
-      DRb.start_service
+      DRb.start_service("druby://127.0.0.1:#{find_available_port}")
       manager = DRbObject.new_with_uri("druby://127.0.0.1:#{server_port}")
 
       # We want to share our local configuration with the remote server
