@@ -15,10 +15,7 @@ $:.detect do |dir|
     $:.unshift( spec_dir )
   end
 end
-
-require File.join(spec_dir,"spec_helper")
-require "support/application"
-
+                             
 RSpec.configure do |config|
   running_with_jruby = RUBY_PLATFORM =~ /java/
 
@@ -37,3 +34,6 @@ RSpec.configure do |config|
     return true if value == :jruby && !running_with_jruby
   })
 end
+
+require File.join(spec_dir,"spec_helper")
+require "support/application"
