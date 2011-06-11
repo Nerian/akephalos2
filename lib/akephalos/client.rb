@@ -19,29 +19,59 @@ else
     # point for all interaction with the browser, exposing its current page and
     # allowing navigation.
     class Client
+
+      # @return [Akephalos::Page] the current page
       attr_reader :page
 
-      def initialize
-        @_client = java.util.concurrent.FutureTask.new do
-          client = HtmlUnit::WebClient.new
+      # @return [HtmlUnit::BrowserVersion] the configured browser version
+      attr_reader :browser_version
 
-          Filter.new(client)
+      # @return [true/false] whether to raise errors on javascript failures
+      attr_reader :validate_scripts
+
+      # @return [true/false] whether to ignore insecure ssl certificates
+      attr_reader :use_insecure_ssl
+
+      # The default configuration options for a new Client.
+      DEFAULT_OPTIONS = {
+        :browser => :firefox_3_6,
+        :validate_scripts => true,
+        :use_insecure_ssl => false
+      }
+
+      # Map of browser version symbols to their HtmlUnit::BrowserVersion
+      # instances.
+      BROWSER_VERSIONS = {
+        :ie6         => HtmlUnit::BrowserVersion::INTERNET_EXPLORER_6,
+        :ie7         => HtmlUnit::BrowserVersion::INTERNET_EXPLORER_7,
+        :ie8         => HtmlUnit::BrowserVersion::INTERNET_EXPLORER_8,
+        :firefox_3   => HtmlUnit::BrowserVersion::FIREFOX_3,
+        :firefox_3_6 => HtmlUnit::BrowserVersion::FIREFOX_3_6
+      }
+
+      # @param [Hash] options the configuration options for this client
+      #
+      # @option options [Symbol] :browser (:firefox_3_6) the browser version (
+      #   see BROWSER_VERSIONS)
+      #
+      # @option options [true, false] :validate_scripts (true) whether to raise
+      #   errors on javascript errors
+      def initialize(options = {})
+        process_options!(options)
+
+        @_client = java.util.concurrent.FutureTask.new do
+          client = HtmlUnit::WebClient.new(browser_version)
+
+          client.setThrowExceptionOnFailingStatusCode(false)
           client.setAjaxController(HtmlUnit::NicelyResynchronizingAjaxController.new)
           client.setCssErrorHandler(HtmlUnit::SilentCssErrorHandler.new)
+          client.setThrowExceptionOnScriptError(validate_scripts)
+          client.setUseInsecureSSL(use_insecure_ssl)
 
+          Filter.new(client)
           client
         end
         Thread.new { @_client.run }
-      end
-
-      # Set the global configuration settings for Akephalos.
-      #
-      # @note This is only used when communicating over DRb, since just a
-      # single client instance is exposed.
-      # @param [Hash] config the configuration settings
-      # @return [Hash] the configuration
-      def configuration=(config)
-        Akephalos.configuration = config
       end
 
       # Visit the requested URL and return the page.
@@ -93,6 +123,29 @@ else
           @page = Page.new(_page)
         end
         @page
+      end
+
+      # @return [true, false] whether javascript errors will raise exceptions
+      def validate_scripts?
+        !!validate_scripts
+      end
+
+      # @return [true, false] whether to ignore insecure ssl certificates 
+      def use_insecure_ssl?
+        !!use_insecure_ssl
+      end
+
+      # Merges the DEFAULT_OPTIONS with those provided to initialize the Client
+      # state, namely, its browser version and whether it should
+      # validate scripts.
+      #
+      # @param [Hash] options the options to process
+      def process_options!(options)
+        options = DEFAULT_OPTIONS.merge(options)
+
+        @browser_version  = BROWSER_VERSIONS.fetch(options.delete(:browser))
+        @validate_scripts = options.delete(:validate_scripts)
+        @use_insecure_ssl = options.delete(:use_insecure_ssl)
       end
 
       private

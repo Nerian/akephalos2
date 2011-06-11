@@ -160,15 +160,37 @@ class Capybara::Driver::Akephalos < Capybara::Driver::Base
     end
   end
 
-  attr_reader :app, :rack_server
+  attr_reader :app, :rack_server, :options
 
-  # @return [Client] an instance of Akephalos::Client
-  def self.driver
-    @driver ||= Akephalos::Client.new
-  end
-
-  def initialize(app)
+  # Creates a new instance of the Akephalos Driver for Capybara. The driver is
+  # registered with Capybara by a name, so that it can be chosen when
+  # Capybara's javascript_driver is changed. By default, Akephalos is
+  # registered like this:
+  #
+  #   Capybara.register_driver :akephalos do |app|
+  #     Capybara::Akephalos::Driver.new(
+  #       app,
+  #       :browser => :firefox_3_6,
+  #       :validate_scripts => true
+  #     )
+  #   end
+  #
+  # @param app the Rack application to run
+  # @param [Hash] options the Akephalos configuration options
+  # @option options [Symbol] :browser (:firefox_3_6) the browser
+  #   compatibility mode to run in. Available options:
+  #       :firefox_3_6
+  #       :firefox_3
+  #       :ie6
+  #       :ie7
+  #       :ie8
+  #
+  # @option options [true, false] :validate_scripts (true) whether to raise
+  #   exceptions on script errors
+  #
+  def initialize(app, options = {})
     @app = app
+    @options = options
     @rack_server = Capybara::Server.new(@app)
     @rack_server.boot if Capybara.run_server
   end
@@ -271,7 +293,7 @@ class Capybara::Driver::Akephalos < Capybara::Driver::Base
 
   # @return the browser
   def browser
-    self.class.driver
+    @browser ||= Akephalos::Client.new(@options)
   end
 
   # @return the session cookies

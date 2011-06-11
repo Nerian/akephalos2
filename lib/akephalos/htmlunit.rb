@@ -10,7 +10,7 @@ Dir[File.join(dependency_directory, "htmlunit/*.jar")].each do |jar|
 end
 
 java.lang.System.setProperty("org.apache.commons.logging.Log", "org.apache.commons.logging.impl.SimpleLog")
-java.lang.System.setProperty("org.apache.commons.logging.simplelog.defaultlog", "fatal")
+java.lang.System.setProperty("org.apache.commons.logging.simplelog.defaultlog", "debug")
 java.lang.System.setProperty("org.apache.commons.logging.simplelog.showdatetime", "true")
 
 # Container module for com.gargoylesoftware.htmlunit namespace.
@@ -32,7 +32,4 @@ module HtmlUnit
 
   # Disable history tracking
   History.field_reader :ignoreNewPages_
-
-  # Run in Firefox compatibility mode
-  BrowserVersion.setDefault(BrowserVersion::FIREFOX_3)
 end
