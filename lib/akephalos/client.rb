@@ -130,7 +130,7 @@ else
         !!validate_scripts
       end
 
-      # @return [true, false] whether to ignore insecure ssl certificates 
+      # @return [true, false] whether to ignore insecure ssl certificates
       def use_insecure_ssl?
         !!use_insecure_ssl
       end
@@ -146,6 +146,8 @@ else
         @browser_version  = BROWSER_VERSIONS.fetch(options.delete(:browser))
         @validate_scripts = options.delete(:validate_scripts)
         @use_insecure_ssl = options.delete(:use_insecure_ssl)
+
+        java.lang.System.setProperty("org.apache.commons.logging.simplelog.defaultlog", options.delete(:htmlunit_log_level)) if options[:htmlunit_log_level]
       end
 
       private
