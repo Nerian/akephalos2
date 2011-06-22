@@ -60,6 +60,21 @@ class Application < TestApp
   </body>
     HTML
   end
+
+  get "/confirm_test" do
+    <<-HTML
+  <body>
+    <p id="test">Test</p>
+    <script type="text/javascript">
+      if (confirm("Are you sure?")) {
+        document.getElementById("test").innerHTML = 'Confirmed';
+      } else {
+        document.getElementById("test").innerHTML = 'Cancelled';
+      }
+    </script>
+  </body>
+    HTML
+  end
 end
 
 if $0 == __FILE__
