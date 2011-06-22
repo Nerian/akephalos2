@@ -18,6 +18,7 @@ module HtmlUnit
   java_import "com.gargoylesoftware.htmlunit.BrowserVersion"
   java_import "com.gargoylesoftware.htmlunit.History"
   java_import "com.gargoylesoftware.htmlunit.HttpMethod"
+  java_import 'com.gargoylesoftware.htmlunit.ConfirmHandler'
   java_import "com.gargoylesoftware.htmlunit.NicelyResynchronizingAjaxController"
   java_import "com.gargoylesoftware.htmlunit.SilentCssErrorHandler"
   java_import "com.gargoylesoftware.htmlunit.WebClient"

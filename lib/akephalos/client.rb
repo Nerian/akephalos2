@@ -6,6 +6,7 @@ if RUBY_PLATFORM != "java"
 else
   require 'akephalos/htmlunit'
   require 'akephalos/htmlunit/ext/http_method'
+  require 'akephalos/htmlunit/ext/confirm_handler'
 
   require 'akephalos/page'
   require 'akephalos/node'
@@ -134,6 +135,15 @@ else
 
         @browser_version  = BROWSER_VERSIONS.fetch(options.delete(:browser))
         @validate_scripts = options.delete(:validate_scripts)
+      end
+
+      # Confirm or cancel the dialog, returning the text of the dialog
+      def confirm_dialog(confirm = true, &block)
+        handler = HtmlUnit::ConfirmHandler.new
+        handler.handleConfirmValue = confirm
+        client.setConfirmHandler(handler)
+        yield
+        return handler.text
       end
 
       private
