@@ -40,7 +40,7 @@ else
         :browser => :firefox_3_6,
         :validate_scripts => true,
         :use_insecure_ssl => false,
-        :htmlunit_log_level => 'Fatal'
+        :htmlunit_log_level => 'fatal'
       }
 
       # Map of browser version symbols to their HtmlUnit::BrowserVersion
