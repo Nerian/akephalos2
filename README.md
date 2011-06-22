@@ -66,7 +66,17 @@ ignore javascript errors.
 
     Capybara.register_driver :akephalos do |app|
       Capybara::Driver::Akephalos.new(app, :validate_scripts => false)
-    end
+    end   
+
+### Setting the HtmlUnit log level
+
+By default it uses the 'fatal' level. You can change that like this:
+
+	Capybara.register_driver :akephalos do |app|  
+		# available options 
+		# "trace", "debug", "info", "warn", "error", or "fatal"
+		Capybara::Driver::Akephalos.new(app, :htmlunit_log_level => 'fatal')
+	end
 
 ## More
 

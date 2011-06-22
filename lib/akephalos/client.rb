@@ -31,12 +31,16 @@ else
 
       # @return [true/false] whether to ignore insecure ssl certificates
       attr_reader :use_insecure_ssl
+                                   
+      # @return ["trace" / "debug" / "info" / "warn" / "error" or "fatal"] which points the htmlunit log level
+      attr_reader :htmlunit_log_level
 
       # The default configuration options for a new Client.
       DEFAULT_OPTIONS = {
         :browser => :firefox_3_6,
         :validate_scripts => true,
-        :use_insecure_ssl => false
+        :use_insecure_ssl => false,
+        :htmlunit_log_level => 'Fatal'
       }
 
       # Map of browser version symbols to their HtmlUnit::BrowserVersion
@@ -136,8 +140,8 @@ else
       end
 
       # Merges the DEFAULT_OPTIONS with those provided to initialize the Client
-      # state, namely, its browser version and whether it should
-      # validate scripts.
+      # state, namely, its browser version, whether it should
+      # validate scripts, and htmlunit log level.
       #
       # @param [Hash] options the options to process
       def process_options!(options)
@@ -146,8 +150,9 @@ else
         @browser_version  = BROWSER_VERSIONS.fetch(options.delete(:browser))
         @validate_scripts = options.delete(:validate_scripts)
         @use_insecure_ssl = options.delete(:use_insecure_ssl)
+        @htmlunit_log_level = options.delete(:htmlunit_log_level)
 
-        java.lang.System.setProperty("org.apache.commons.logging.simplelog.defaultlog", options.delete(:htmlunit_log_level)) if options[:htmlunit_log_level]
+        java.lang.System.setProperty("org.apache.commons.logging.simplelog.defaultlog", @htmlunit_log_level)
       end
 
       private
