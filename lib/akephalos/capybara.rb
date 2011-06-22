@@ -255,6 +255,11 @@ class Capybara::Driver::Akephalos < Capybara::Driver::Base
     cookies.clear
   end
 
+  # Confirm or cancel the dialog, returning the text of the dialog
+  def confirm_dialog(confirm = true, &block)
+    browser.confirm_dialog(confirm, &block)
+  end
+
   # @return [String] the page's current URL
   def current_url
     page.current_url

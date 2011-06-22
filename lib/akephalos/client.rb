@@ -6,6 +6,7 @@ if RUBY_PLATFORM != "java"
 else
   require 'akephalos/htmlunit'
   require 'akephalos/htmlunit/ext/http_method'
+  require 'akephalos/htmlunit/ext/confirm_handler'
 
   require 'akephalos/page'
   require 'akephalos/node'
@@ -153,6 +154,15 @@ else
         @htmlunit_log_level = options.delete(:htmlunit_log_level)
 
         java.lang.System.setProperty("org.apache.commons.logging.simplelog.defaultlog", @htmlunit_log_level)
+      end
+
+      # Confirm or cancel the dialog, returning the text of the dialog
+      def confirm_dialog(confirm = true, &block)
+        handler = HtmlUnit::ConfirmHandler.new
+        handler.handleConfirmValue = confirm
+        client.setConfirmHandler(handler)
+        yield
+        return handler.text
       end
 
       private
