@@ -61,6 +61,33 @@ class Application < TestApp
     HTML
   end
 
+  # &#09;   horizontal tab
+  # &#10;   line feed
+  # &#13;   carriage return
+  # &#160;	&nbsp;
+  get "/domnode_test" do
+    <<-HTML
+  <body>
+    <p id="original_html">original html</p>
+    <p id="horizontal_tab">&#09;original&#09; html&#09;</p>
+    <p id="line_feed">&#10;original&#10; html&#10;</p>
+    <p id="carriage_return">&#13;original&#13; html&#13;</p>
+    <p id="non_breaking_space">&#160;original&#160; html&#160;</p>
+  </body>
+    HTML
+  end
+
+  get "/xml_vs_source_test" do
+    <<-HTML
+  <body>
+    <p id="javascript_modified">javascript modified</p>
+    <script type="text/javascript">
+        document.getElementById("javascript_modified").innerHTML = 'javascript modified after';
+    </script>
+  </body>
+    HTML
+  end
+
   get "/confirm_test" do
     <<-HTML
   <body>

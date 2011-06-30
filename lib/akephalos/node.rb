@@ -19,8 +19,24 @@ module Akephalos
     end
 
     # @return [String] inner text of the node
-    def text
-      @_node.asText
+    # Returns a textual representation of this element that represents what would
+    # be visible to the user if this page was shown in a web browser.
+    # For example, a single-selection select element would return the currently
+    # selected value as text.
+    # Note: This will cleanup/reduce whitespace
+     def text
+       @_node.asText
+     end
+
+    # Returns the raw text content of this node and its descendants...
+    def text_content
+      @_node.getTextContent
+    end
+
+    # Returns a string representation of the XML document from this element and
+    # all it's children (recursively). The charset used is the current page encoding.
+    def xml
+      @_node.asXml
     end
 
     # Return the value of the node's attribute.
