@@ -161,7 +161,7 @@ else
         handler = HtmlUnit::ConfirmHandler.new
         handler.handleConfirmValue = confirm
         client.setConfirmHandler(handler)
-        yield
+        yield if block_given?
         return handler.text
       end
 
