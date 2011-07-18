@@ -23,6 +23,27 @@ describe Akephalos::Client, :platform => :jruby do
         HtmlUnit::BrowserVersion::INTERNET_EXPLORER_7
     end
 
+  end 
+  
+  context "HTMLUnit log level" do   
+    
+    it "defaults to fatal" do
+      client = Akephalos::Client.new
+      client.htmlunit_log_level.should == 'fatal'
+    end
+    
+    context "#can be configured to" do
+      
+      ["trace", "debug", "info", "warn", "error", "fatal"].each do |log_level|
+        it "#{log_level}" do
+          client = Akephalos::Client.new(:htmlunit_log_level => log_level)
+          client.htmlunit_log_level.should == log_level
+        end
+        
+      end
+      
+    end
+                    
   end
 
   context "script validation" do
@@ -63,6 +84,4 @@ describe Akephalos::Client, :platform => :jruby do
 
   end
   
-
-
 end

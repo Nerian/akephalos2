@@ -66,7 +66,30 @@ ignore javascript errors.
 
     Capybara.register_driver :akephalos do |app|
       Capybara::Driver::Akephalos.new(app, :validate_scripts => false)
+    end   
+
+### Setting the HtmlUnit log level
+
+By default it uses the 'fatal' level. You can change that like this:
+
+	Capybara.register_driver :akephalos do |app|  
+		# available options 
+		# "trace", "debug", "info", "warn", "error", or "fatal"
+		Capybara::Driver::Akephalos.new(app, :htmlunit_log_level => 'fatal')
+	end
+
+### Running Akephalos with Spork
+
+    Spork.prefork do
+      ...
+      Akephalos::RemoteClient.manager                                 
     end
+
+    Spork.each_run do
+      Thread.current['DRb'] = { 'server' => DRb::DRbServer.new }
+    end
+
+More info at : [sporking-with-akephalos](http://spacevatican.org/2011/7/3/sporking-with-akephalos)
 
 ## More
 
