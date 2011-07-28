@@ -56,7 +56,12 @@ else
         process_options!(options)
 
         @_client = java.util.concurrent.FutureTask.new do
-          client = HtmlUnit::WebClient.new(browser_version)
+
+          if @http_proxy.nil? or @http_proxy_port.nil?
+            client = HtmlUnit::WebClient.new(browser_version)
+          else
+            client = HtmlUnit::WebClient.new(browser_version, @http_proxy, @http_proxy_port)
+          end
 
           Filter.new(client)
           client.setThrowExceptionOnFailingStatusCode(false)
@@ -134,6 +139,8 @@ else
 
         @browser_version  = BROWSER_VERSIONS.fetch(options.delete(:browser))
         @validate_scripts = options.delete(:validate_scripts)
+        @http_proxy = options.delete(:http_proxy)
+        @http_proxy_port = options.delete(:http_proxy_port)
       end
 
       private

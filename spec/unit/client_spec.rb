@@ -23,6 +23,17 @@ describe Akephalos::Client, :platform => :jruby do
         HtmlUnit::BrowserVersion::INTERNET_EXPLORER_7
     end
 
+    it "configures proxy server" do
+      http_proxy = 'myproxy.com'
+      http_proxy_port = 8080
+
+      client = Akephalos::Client.new(:http_proxy => http_proxy, :http_proxy_port => http_proxy_port)
+
+      proxy_config = client.send(:client).getProxyConfig
+      proxy_config.getProxyHost.should == http_proxy
+      proxy_config.getProxyPort.should == http_proxy_port
+    end
+
   end
 
   context "script validation" do
