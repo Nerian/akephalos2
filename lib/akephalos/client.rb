@@ -32,7 +32,7 @@ else
 
       # @return [true/false] whether to ignore insecure ssl certificates
       attr_reader :use_insecure_ssl
-                                   
+
       # @return ["trace" / "debug" / "info" / "warn" / "error" or "fatal"] which points the htmlunit log level
       attr_reader :htmlunit_log_level
 
@@ -161,7 +161,7 @@ else
         handler = HtmlUnit::ConfirmHandler.new
         handler.handleConfirmValue = confirm
         client.setConfirmHandler(handler)
-        yield
+        yield if block_given?
         return handler.text
       end
 
