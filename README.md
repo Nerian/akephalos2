@@ -53,7 +53,13 @@ Firefox 3.6.
       # available options:
       #   :ie6, :ie7, :ie8, :firefox_3, :firefox_3_6
       Capybara::Driver::Akephalos.new(app, :browser => :ie8)
-    end
+    end          
+
+### Using a Proxy Server
+                
+Capybara.register_driver :akephalos do |app|
+  Capybara::Driver::Akephalos.new(app, :http_proxy => 'myproxy.com', :http_proxy_port => 8080)
+end
 
 ### Ignoring javascript errors
 

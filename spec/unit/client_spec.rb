@@ -22,7 +22,7 @@ describe Akephalos::Client, :platform => :jruby do
       client.send(:client).getBrowserVersion.should ==
         HtmlUnit::BrowserVersion::INTERNET_EXPLORER_7
     end
-
+    
   end 
   
   context "HTMLUnit log level" do   
@@ -38,12 +38,10 @@ describe Akephalos::Client, :platform => :jruby do
         it "#{log_level}" do
           client = Akephalos::Client.new(:htmlunit_log_level => log_level)
           client.htmlunit_log_level.should == log_level
-        end
-        
-      end
-      
+        end                
+      end  
+          
     end
-                    
   end
 
   context "script validation" do
@@ -64,7 +62,20 @@ describe Akephalos::Client, :platform => :jruby do
       client.send(:client).isThrowExceptionOnScriptError.should be_false
     end
 
-  end
+  end     
+         
+  context "using proxy server" do
+    it "configures proxy server" do
+      http_proxy = 'myproxy.com'
+      http_proxy_port = 8080
+
+      client = Akephalos::Client.new(:http_proxy => http_proxy, :http_proxy_port => http_proxy_port)
+
+      proxy_config = client.send(:client).getProxyConfig
+      proxy_config.getProxyHost.should == http_proxy
+      proxy_config.getProxyPort.should == http_proxy_port
+    end
+  end  
 
   context "using insecure ssl verification" do
 

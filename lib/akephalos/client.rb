@@ -65,7 +65,12 @@ else
         process_options!(options)
 
         @_client = java.util.concurrent.FutureTask.new do
-          client = HtmlUnit::WebClient.new(browser_version)
+
+          if @http_proxy.nil? or @http_proxy_port.nil?
+            client = HtmlUnit::WebClient.new(browser_version)
+          else
+            client = HtmlUnit::WebClient.new(browser_version, @http_proxy, @http_proxy_port)
+          end
 
           client.setThrowExceptionOnFailingStatusCode(false)
           client.setAjaxController(HtmlUnit::NicelyResynchronizingAjaxController.new)
@@ -152,6 +157,8 @@ else
         @validate_scripts = options.delete(:validate_scripts)
         @use_insecure_ssl = options.delete(:use_insecure_ssl)
         @htmlunit_log_level = options.delete(:htmlunit_log_level)
+        @http_proxy = options.delete(:http_proxy)
+        @http_proxy_port = options.delete(:http_proxy_port)
 
         java.lang.System.setProperty("org.apache.commons.logging.simplelog.defaultlog", @htmlunit_log_level)
       end
