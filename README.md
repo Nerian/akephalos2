@@ -1,4 +1,5 @@
-# Akephalos
+# Akephalos        
+
 Akephalos is a full-stack headless browser for integration testing with
 Capybara. It is built on top of [HtmlUnit](http://htmlunit.sourceforge.net),
 a GUI-less browser for the Java platform, but can be run on both JRuby and
@@ -64,9 +65,9 @@ end
 ### Ignoring javascript errors
 
 By default HtmlUnit (and Akephalos) will raise an exception when an error
-is encountered in javascript files. This is generally desireable, except
+is encountered in javascript files. This is generally desirable, except
 that certain libraries aren't supported by HtmlUnit. If possible, it's
-best to keep the default behavior, and use Filters (see below) to mock
+best to keep the default behaviour, and use Filters (see below) to mock
 offending libraries. If needed, however, you can configure Akephalos to
 ignore javascript errors.
 
@@ -97,15 +98,94 @@ By default it uses the 'fatal' level. You can change that like this:
 
 More info at : [sporking-with-akephalos](http://spacevatican.org/2011/7/3/sporking-with-akephalos)
 
-## More
+### Filters
 
-* [bin/akephalos](http://bernerdschaefer.github.com/akephalos/akephalos-bin.html)
-  allows you to start an interactive shell or DRb server, as well as perform
-  other maintenance features.
+Akephalos allows you to filter requests originating from the browser and return mock responses. This will let you easily filter requests for external resources when running your tests, such as Facebook's API and Google Analytics.
 
-* [Filters](http://bernerdschaefer.github.com/akephalos/filters.html) allows
-  you to declare mock responses for external resources and services requested
-  by the browser.
+Configuring filters in Akephalos should be familiar to anyone who has used FakeWeb or a similar library. The simplest filter requires only an HTTP method (:get, :post, :put, :delete, :any) and a string or regex to match against.       
+
+	Akephalos.filter(:get, "http://www.google.com")
+	Akephalos.filter(:any, %r{^http://(api\.)?twitter\.com/.*$})
+	
+By default, all filtered requests will return an empty body with a 200 status code. You can change this by passing additional options to your filter call.
+
+	Akephalos.filter(:get, "http://google.com/missing", 
+		:status => 404, :body => "... <h1>Not Found</h1> ...")
+
+	Akephalos.filter(:post, "http://my-api.com/resource.xml",
+		:status => 201, :headers => {
+			"Content-Type" => "application/xml",
+			"Location" => "http://my-api.com/resources/1.xml" },
+		:body => {:id => 100}.to_xml)	
+                                         
+And that's really all there is to it! It should be fairly trivial to set up filters for the external resources you need to fake. For reference, however, here's what we ended up using for our external sources.
+
+#### Example: Google Maps
+
+Google Analytics code is passively applied based on HTML comments, so simply returning an empty response body is enough to disable it without errors.
+
+	Akephalos.filter(:get, "http://www.google-analytics.com/ga.js",
+		:headers => {"Content-Type" => "application/javascript"})    
+		
+Google Maps requires the most extensive amount of API definitions of the three, but these few lines cover everything we've encountered so far.
+
+	Akephalos.filter(:get, "http://maps.google.com/maps/api/js?sensor=false",
+		:headers => {"Content-Type" => "application/javascript"},
+		:body => "window.google = {
+			maps: {
+				LatLng: function(){},
+				Map: function(){},
+				Marker: function(){},
+				MapTypeId: {ROADMAP:1}
+			}
+		};") 
+		
+#### Example: Facebook Connect
+
+Facebook Connect
+
+When you enable Facebook Connect on your page, the FeatureLoader is requested, and then additional resources are loaded when you call FB_RequireFeatures. We can therefore return an empty function from our filter to disable all Facebook Connect code.		                 
+
+	Akephalos.filter(:get, 
+		"http://static.ak.connect.facebook.com/js/api_lib/v0.4/FeatureLoader.js.php",
+		:headers => {"Content-Type" => "application/javascript"},
+		:body => "window.FB_RequireFeatures = function() {};")    
+		
+### Akephalos' Interactive mode
+
+#### bin/akephalos
+
+The bundled akephalos binary provides a command line interface to a few useful features.
+
+#### akephalos --interactive
+
+Running Akephalos in interactive mode gives you an IRB context for interacting with your site just as you would in your tests:
+
+	akephalos --interactive
+	->	Capybara.app_host # => "http://localhost:3000"
+	->	page.visit "/"
+	->	page.fill_in "Search", :with => "akephalos"
+	->	page.click_button "Go"
+	->	page.has_css?("#search_results") # => true  
+	
+	
+#### akephalos --use-htmlunit-snapshot
+	
+This will instruct Akephalos to use the latest development snapshot of HtmlUnit as found on it's Cruise Control server. HtmlUnit and its dependencies will be unpacked into vendor/htmlunit in the current working directory.
+
+This is what the output looks like:
+
+	bin/akephalos --use-htmlunit-snapshot
+
+	Downloading latest snapshot... done
+	Extracting dependencies... done
+	========================================
+	The latest HtmlUnit snapshot has been extracted to vendor/htmlunit!
+	Once HtmlUnit has been extracted, Akephalos will automatically detect the vendored version and use it instead of the bundled version.
+
+#### akephalos --server <socket_file>
+
+Akephalos uses this command internally to start a JRuby DRb server using the provided socket file.
 
 ## Resources
 
