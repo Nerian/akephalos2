@@ -58,9 +58,9 @@ Firefox 3.6.
 
 ### Using a Proxy Server
                 
-Capybara.register_driver :akephalos do |app|
-  Capybara::Driver::Akephalos.new(app, :http_proxy => 'myproxy.com', :http_proxy_port => 8080)
-end
+	Capybara.register_driver :akephalos do |app|
+		Capybara::Driver::Akephalos.new(app, :http_proxy => 'myproxy.com', :http_proxy_port => 8080)
+	end
 
 ### Ignoring javascript errors
 
