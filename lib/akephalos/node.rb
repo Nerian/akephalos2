@@ -164,9 +164,13 @@ module Akephalos
     # Click the node and then wait for any triggered JavaScript callbacks to
     # fire.
     def click
-      @_node.click
-      @_node.getPage.getEnclosingWindow.getJobManager.waitForJobs(1000)
-      @_node.getPage.getEnclosingWindow.getJobManager.waitForJobsStartingBefore(1000)
+      begin
+        @_node.click
+        @_node.getPage.getEnclosingWindow.getJobManager.waitForJobs(1000)
+        @_node.getPage.getEnclosingWindow.getJobManager.waitForJobsStartingBefore(1000)
+      rescue Exception => e
+        raise e unless e.message == 'java.lang.NullPointerException: null'
+      end
     end
 
     # Search for child nodes which match the given XPath selector.
