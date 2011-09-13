@@ -48,11 +48,15 @@ There are now a few configuration options available through Capybara's new
 
 The max memory that the JVM is going to use can be set using a environment variable in your spec_helper or .bashrc file.
 
-````ruby                                                                            
+```` ruby                                                                            
 ENV['akephalos_jvm_max_memory']
 ```
 
-If you run akephalos on interactive mode the parameter `-m [memory]` sets the max memory.
+If you use the akpehalos bin directly the parameter `-m [memory]` sets the max memory for the JVM.
+
+``` bash
+$ akephalos -m 670
+```
 
 ### Using a different browser
 
