@@ -9,7 +9,14 @@ MRI with no need for JRuby to be installed on the system.
      
 ``` ruby
 gem install akephalos
+```     
+
+Or
+
+``` ruby
+gem 'akephalos', :git => 'git://github.com/Nerian/akephalos.git'
 ```
+  
 
 ## Setup
 
