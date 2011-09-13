@@ -42,7 +42,17 @@ Here's some sample RSpec code:
 ## Configuration
 
 There are now a few configuration options available through Capybara's new
-`register_driver` API.
+`register_driver` API.    
+
+### Configuring the max memory that Java Virtual Machine can use
+
+The max memory that the JVM is going to use can be set using a environment variable in your spec_helper or .bashrc file.
+
+````ruby                                                                            
+ENV['akephalos_jvm_max_memory']
+```
+
+If you run akephalos on interactive mode the parameter `-m [memory]` sets the max memory.
 
 ### Using a different browser
 

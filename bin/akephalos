@@ -4,13 +4,27 @@
 require "pathname"
 require "optparse"
 
-options = { :interactive => false }
+options = { :interactive => false, :default_jvm_max_memory => '256' }
 
 parser = OptionParser.new do |opts|
-  opts.banner = "Usage: akephalos [--interactive, --use-htmlunit-snapshot] | [--server] <port>"
+  opts.banner = "Usage: akephalos [--interactive, --use-htmlunit-snapshot, --memory [number]] | [--server] <port>"
   opts.on("-s", "--server", "Run in server mode (default)")
   opts.on("-i", "--interactive", "Run in interactive mode") { options[:interactive] = true }
   opts.on("--use-htmlunit-snapshot", "Use the snapshot of htmlunit") { options[:use_htmlunit_snapshot] = true }
+  opts.on("-m", "--memory [number]", "Max memory for the Java Virtual Machine, defaults to #{options[:default_jvm_max_memory]}
+  or env variable $akephalos_jvm_max_memory") do |memory| 
+    options[:akephalos_jvm_max_memory] = memory.to_s
+  end       
+  
+  if options[:akephalos_jvm_max_memory].nil?
+    if ENV['akephalos_jvm_max_memory'].nil?     
+      options[:akephalos_jvm_max_memory] = options[:default_jvm_max_memory]
+    else
+      options[:akephalos_jvm_max_memory] = ENV['akephalos_jvm_max_memory']
+    end
+  end  
+  
+  puts "Using #{options[:akephalos_jvm_max_memory]} MB for the JVM"                           
 
   opts.on_tail("-h", "--help", "Show this message") { puts opts; exit }
 end
@@ -61,13 +75,13 @@ else
     Akephalos::Server.start!(port)
   else
     require 'rubygems'
-    require 'jruby-jars'
+    require 'jruby-jars'              
 
     jruby = JRubyJars.core_jar_path
-    jruby_stdlib = JRubyJars.stdlib_jar_path
+    jruby_stdlib = JRubyJars.stdlib_jar_path          
 
     java_args = [
-      "-Xmx512M",
+     "-Xmx#{options[:akephalos_jvm_max_memory]}M",
       "-cp", [JRubyJars.core_jar_path, JRubyJars.stdlib_jar_path].join(File::PATH_SEPARATOR),
       "org.jruby.Main"
     ]
