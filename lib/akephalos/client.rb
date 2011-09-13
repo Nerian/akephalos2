@@ -89,7 +89,11 @@ else
       # @param [String] url the URL to load
       # @return [Page] the loaded page
       def visit(url)
-        client.getPage(url)
+        begin
+          client.getPage(url)
+        rescue Exception => e
+          raise e unless e.message == 'java.lang.NullPointerException: null'
+        end
         page
       end
 
