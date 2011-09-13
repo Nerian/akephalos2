@@ -46,7 +46,7 @@ There are now a few configuration options available through Capybara's new
 
 ### Configuring the max memory that Java Virtual Machine can use
 
-The max memory that the JVM is going to use can be set using a environment variable in your spec_helper or .bashrc file.
+The max memory that the JVM is going to use can be set using an environment variable in your spec_helper or .bashrc file.
 
 ```` ruby                                                                            
 ENV['akephalos_jvm_max_memory']
