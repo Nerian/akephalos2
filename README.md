@@ -52,7 +52,7 @@ The max memory that the JVM is going to use can be set using an environment vari
 ENV['akephalos_jvm_max_memory']
 ```
 
-If you use the akpehalos bin directly the parameter `-m [memory]` sets the max memory for the JVM.
+If you use akephalos's bin the parameter `-m [memory]` sets the max memory for the JVM.
 
 ``` bash
 $ akephalos -m 670
