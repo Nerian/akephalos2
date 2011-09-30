@@ -21,7 +21,7 @@ MRI with no need for JRuby to be installed on the system.
 ## Installation
      
 ``` ruby
-gem install akephalos # Official gem
+gem install akephalos2
 ```     
 
 Or

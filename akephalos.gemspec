@@ -5,12 +5,12 @@ $:.unshift lib unless $:.include?(lib)
 require "akephalos/version"
 
 Gem::Specification.new do |s|
-  s.name        = "akephalos"
+  s.name        = "akephalos2"
   s.version     = Akephalos::VERSION
   s.platform    = ENV["PLATFORM"] || "ruby"
   s.authors     = ["Bernerd Schaefer"]
   s.email       = "bj.schaefer@gmail.com"
-  s.homepage    = "http://bernerdschaefer.github.com/akephalos"
+  s.homepage    = "https://github.com/Nerian/akephalos"
   s.summary     = "Headless Browser for Integration Testing with Capybara"
   s.description = s.summary
 

@@ -1,3 +1,3 @@
 module Akephalos #:nodoc
-  VERSION = "0.2.5"
+  VERSION = "2.0.0"
 end
