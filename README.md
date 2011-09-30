@@ -1,3 +1,14 @@
+```
+Important Notice
+This repo has rewrote its history and as such is not compatible with the main Akephalos repo. 
+
+Further development will be done here.
+ 
+You can get the unaltered pristine copy at: https://github.com/Nerian/akephalos
+
+The reason why its history was rewrote was to remove .jar vendor files that were making its size huge.
+```
+
 # Akephalos        
 
 Akephalos is a full-stack headless browser for integration testing with
@@ -8,7 +19,7 @@ MRI with no need for JRuby to be installed on the system.
 ## Installation
      
 ``` ruby
-gem install akephalos
+gem install akephalos # Official gem
 ```     
 
 Or
@@ -16,16 +27,7 @@ Or
 ``` ruby
 gem 'akephalos', :git => 'git://github.com/Nerian/akephalos.git'
 ```
-
-# Development
-
-``` bash
-git clone https://Nerian@github.com/Nerian/akephalos.git
-git submodule init
-git submodule update
-```
   
-
 ## Setup
 
 Configuring akephalos is as simple as requiring it and setting Capybara's
