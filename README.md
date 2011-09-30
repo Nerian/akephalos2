@@ -16,6 +16,14 @@ Or
 ``` ruby
 gem 'akephalos', :git => 'git://github.com/Nerian/akephalos.git'
 ```
+
+# Development
+
+``` bash
+git clone https://Nerian@github.com/Nerian/akephalos.git
+git submodule init
+git submodule update
+```
   
 
 ## Setup

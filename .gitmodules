@@ -1,0 +1,3 @@
+[submodule "vendor/html-unit"]
+	path = vendor/html-unit
+	url = git@github.com:Nerian/html-unit-vendor.git
