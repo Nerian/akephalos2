@@ -4,10 +4,11 @@ This repo has rewrote its history and as such is not compatible with the main Ak
 
 Further development will be done here.
  
-You can get the unaltered pristine copy at: https://github.com/Nerian/akephalos
+You can get the unaltered pristine copy at: [https://github.com/Nerian/akephalos](https://github.com/Nerian/akephalos)
 
 The reason why its history was rewrote was to remove .jar vendor files that were making its size huge.
 ```
+
 
 # Akephalos        
 
@@ -15,6 +16,7 @@ Akephalos is a full-stack headless browser for integration testing with
 Capybara. It is built on top of [HtmlUnit](http://htmlunit.sourceforge.net),
 a GUI-less browser for the Java platform, but can be run on both JRuby and
 MRI with no need for JRuby to be installed on the system.
+
 
 ## Installation
      
@@ -27,6 +29,16 @@ Or
 ``` ruby
 gem 'akephalos', :git => 'git://github.com/Nerian/akephalos.git'
 ```
+
+# Development
+
+``` bash
+git clone https://github.com/Nerian/akephalos2 
+git submodule update --init
+```
+
+The last line will grab the HTMLUnit jar files from [https://github.com/Nerian/html-unit-vendor](https://github.com/Nerian/html-unit-vendor)
+
   
 ## Setup
 
@@ -37,6 +49,7 @@ javascript driver:
 require 'akephalos'
 Capybara.javascript_driver = :akephalos
 ```
+
 
 ## Basic Usage
 
