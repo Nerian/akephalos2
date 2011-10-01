@@ -1,5 +1,5 @@
-```
-Important Notice
+# Important Notice
+
 This repo has rewrote its history and as such is not compatible with the main Akephalos repo. 
 
 Further development will be done here.
@@ -7,7 +7,6 @@ Further development will be done here.
 You can get the unaltered pristine copy at: [https://github.com/Nerian/akephalos](https://github.com/Nerian/akephalos)
 
 The reason why its history was rewrote was to remove .jar vendor files that were making its size huge.
-```
 
 
 # Akephalos        
@@ -35,6 +34,8 @@ gem 'akephalos', :git => 'git://github.com/Nerian/akephalos.git'
 ``` bash
 git clone https://github.com/Nerian/akephalos2 
 git submodule update --init
+# optional
+cp .rvmrc.example .rvmrc
 ```
 
 The last line will grab the HTMLUnit jar files from [https://github.com/Nerian/html-unit-vendor](https://github.com/Nerian/html-unit-vendor)
