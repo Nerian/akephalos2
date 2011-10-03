@@ -36,18 +36,20 @@ gem 'akephalos', :git => 'git://github.com/Nerian/akephalos.git'
 ```
 
 
-
 # Development
 
 ``` bash
 git clone https://github.com/Nerian/akephalos2 
 git submodule update --init
-# optional
-cp .rvmrc.example .rvmrc
 ```
 
 The last line will grab the HTMLUnit jar files from [https://github.com/Nerian/html-unit-vendor](https://github.com/Nerian/html-unit-vendor)
 
+Also, we have a .rvmrc file already cooked:
+
+``` bash
+cp .rvmrc.example .rvmrc
+```
   
 ## Setup
 
@@ -82,7 +84,33 @@ describe "Home Page" do
 	end
 end 
 ```
- 
+
+Capybara allows you to perform your action on a context, for example inside a div or a frame. With Akephalos you can select the frame either by id or by index.
+
+``` html
+<body>
+  <p id="test">Test</p>
+  <iframe id="first" src="/one_text"></iframe>
+  <p id="test2">Test2</p>
+	<iframe class="second" src="/two_text"></iframe>
+	<p id="test3">Test3</p>
+	<iframe id="third" src="/three_text"></iframe>
+</body>
+```
+
+You can operate within the context of iframe `test2` with any of these calls:
+
+``` ruby
+# By ID
+within_frame("test2") do
+	....
+end
+
+# By index
+within_frame(1) do
+	....
+end
+```
 
 ## Configuration
 
