@@ -16,6 +16,7 @@ Gem::Specification.new do |s|
   s.rubyforge_project = "akephalos"
 
   s.add_runtime_dependency "capybara"
+  s.add_runtime_dependency "rake"
   
   if RUBY_PLATFORM != "java" && ENV["PLATFORM"] != "java"
     s.add_runtime_dependency "jruby-jars"

@@ -38,6 +38,8 @@ gem 'akephalos', :git => 'git://github.com/Nerian/akephalos.git'
 
 # Development
 
+<img src="https://secure.travis-ci.org/Nerian/akephalos2.png?branch=master&amp;.png">
+
 ``` bash
 git clone https://github.com/Nerian/akephalos2 
 git submodule update --init
