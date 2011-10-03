@@ -1,4 +1,3 @@
-require 'rubygems'
 require "yaml"
 YAML::ENGINE.yamler= 'syck' if defined?(YAML::ENGINE)
 

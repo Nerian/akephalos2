@@ -59,7 +59,6 @@ when options[:use_htmlunit_snapshot]
   $stdout.puts "The latest HtmlUnit snapshot has been extracted to vendor/htmlunit!"
 when options[:interactive]
   $LOAD_PATH.unshift('vendor', lib, src)
-  require 'rubygems'
   require 'akephalos'
   require 'akephalos/console'
   Akephalos::Console.start
@@ -74,7 +73,6 @@ else
     require 'akephalos/server'
     Akephalos::Server.start!(port)
   else
-    require 'rubygems'
     require 'jruby-jars'              
 
     jruby = JRubyJars.core_jar_path

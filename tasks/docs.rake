@@ -16,7 +16,6 @@ begin
   task 'docs:static' => ['docs/build/.git'] do
     require 'pathname'
     require 'fileutils'
-    require 'rubygems'
     require 'haml'
 
     module Highlighting
