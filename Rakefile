@@ -34,7 +34,6 @@ task :release => 'build:all' do
   end
 end
 
-load 'tasks/docs.rake'
 load 'tasks/spec.rake'
 
 task :default => :spec
