@@ -26,8 +26,16 @@ gem install akephalos2
 Or
 
 ``` ruby
+gem 'akephalos2', :require => 'akephalos'
+```
+
+Or (for the current master branch)  
+
+``` ruby
 gem 'akephalos', :git => 'git://github.com/Nerian/akephalos.git'
 ```
+
+
 
 # Development
 
@@ -50,7 +58,6 @@ javascript driver:
 require 'akephalos'
 Capybara.javascript_driver = :akephalos
 ```
-
 
 ## Basic Usage
 
