@@ -9,7 +9,7 @@ class Application < TestApp
   <head>
     <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
     <title>with_js</title>
-    <script src="/jquery.js" type="text/javascript" charset="utf-8"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js" type="text/javascript" charset="utf-8"></script>
     <script type="text/javascript">
       $(function() {
        $('#ajax_load').click(function() {
