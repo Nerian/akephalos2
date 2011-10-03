@@ -10,16 +10,20 @@ describe Capybara::Session do
     context "iframe selection" do
       it "should select iframe by index" do
       	@session.visit('/iframe_selection_test')
+        @session.within_frame(0) do
+        	@session.should have_content("Frame 1")
+        end
         @session.within_frame(1) do
-        	@session.should have_content("derp")
+        	@session.should have_content("Frame 2")
         end
       end
       
 	  it "should select iframe by id" do
 	    @session.visit('/iframe_selection_test')
-        @session.within_frame('beefcake') do
-			@session.should have_content("tasty and delicious")
-			@session.should_not have_content("derp")
+        @session.within_frame('third') do
+			@session.should have_content("Frame 3")
+			@session.should_not have_content("Frame 2")
+			@session.should_not have_content("Frame 1")
         end
       end      
     end

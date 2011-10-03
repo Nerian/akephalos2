@@ -104,16 +104,19 @@ class Application < TestApp
   end
   
   
-  get '/derp_text' do "<body>derp</body>" end
-  get '/tasty_text' do "<body>tasty and delicious</body>" end
+  get '/one_text' do "<body>Frame 1</body>" end
+  get '/two_text' do "<body>Frame 2</body>" end
+  get '/three_text' do "<body>Frame 3</body>" end
   
   get '/iframe_selection_test' do
    <<-HTML
   <body>
     <p id="test">Test</p>
-    <iframe id="beefcake" src="/tasty_text" />
+    <iframe id="first" src="/one_text"></iframe>
     <p id="test2">Test2</p>
-    <iframe class="stupidiframewithoutid" src="/derp_text" />
+  	<iframe class="second" src="/two_text"></iframe>
+  	<p id="test3">Test3</p>
+  	<iframe id="third" src="/three_text"></iframe>
   </body>
     HTML
   end

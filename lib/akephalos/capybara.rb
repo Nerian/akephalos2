@@ -238,6 +238,7 @@ class Capybara::Driver::Akephalos < Capybara::Driver::Base
   # @param [String] frame_id the frame's id or index
   # @raise [Capybara::ElementNotFound] if the frame is not found
   def within_frame(frame_id_or_index, &block)
+  	result = page.within_frame(frame_id_or_index, &block)
     unless page.within_frame(frame_id_or_index, &block)
       raise Capybara::ElementNotFound, "Unable to find frame with id '#{frame_id_or_index}'"
     end
