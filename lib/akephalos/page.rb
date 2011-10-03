@@ -61,7 +61,7 @@ module Akephalos
 
     # @return [String] the current page's URL.
     def current_url
-      current_frame.getWebResponse.getRequestSettings.getUrl.toString
+      current_frame.getWebResponse.getWebRequest.getUrl.toString
     end
 
     # Execute JavaScript against the current page, discarding any return value.
