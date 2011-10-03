@@ -2,7 +2,7 @@ require 'rubygems'
 require 'yaml'
 
 root = File.expand_path('../../', __FILE__)
-lib_paths = [root] + %w(vendor lib src).collect { |dir| File.join(root, dir) }
+lib_paths = [root] + %w(vendor lib vendor).collect { |dir| File.join(root, dir) }
 (lib_paths).each do |dir|
   $:.unshift dir unless $:.include?(dir)
 end

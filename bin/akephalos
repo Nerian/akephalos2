@@ -32,7 +32,7 @@ parser.parse!
 
 root = Pathname(__FILE__).expand_path.dirname.parent
 lib = root + 'lib'
-src = root + 'src'
+src = root + 'vendor'
 
 case
 when options[:use_htmlunit_snapshot]
