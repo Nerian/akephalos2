@@ -8,7 +8,7 @@ describe "Filters" do
   context "with no filter" do
     it "returns the page's source" do
       @session.visit "/"
-      @session.source.should == "Hello world!"
+      @session.source.should == "Hello world! <a href=\"with_html\">Relative</a>"
     end
   end
 
