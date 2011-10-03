@@ -58,7 +58,7 @@ when options[:use_htmlunit_snapshot]
   $stdout.puts "="*40
   $stdout.puts "The latest HtmlUnit snapshot has been extracted to vendor/htmlunit!"
 when options[:interactive]
-  $:.unshift('vendor', lib, src)
+  $LOAD_PATH.unshift('vendor', lib, src)
   require 'rubygems'
   require 'akephalos'
   require 'akephalos/console'
@@ -70,7 +70,7 @@ else
   end
 
   if RUBY_PLATFORM == "java"
-    $:.unshift("vendor", lib, src)
+    $LOAD_PATH.unshift("vendor", lib, src)
     require 'akephalos/server'
     Akephalos::Server.start!(port)
   else

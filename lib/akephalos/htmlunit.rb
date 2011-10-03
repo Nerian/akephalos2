@@ -1,9 +1,9 @@
 require "pathname"
 require "java"
 
-dependency_directory = $:.detect { |path| Dir[File.join(path, 'html-unit/htmlunit-*.jar')].any? }
+dependency_directory = $LOAD_PATH.detect { |path| Dir[File.join(path, 'html-unit/htmlunit-*.jar')].any? }
 
-raise "Could not find htmlunit/htmlunit-VERSION.jar in load path:\n  [ #{$:.join(",\n    ")}\n  ]" unless dependency_directory
+raise "Could not find htmlunit/htmlunit-VERSION.jar in load path:\n  [ #{$LOAD_PATH.join(",\n    ")}\n  ]" unless dependency_directory
 
 Dir[File.join(dependency_directory, "html-unit/*.jar")].each do |jar|
   require jar

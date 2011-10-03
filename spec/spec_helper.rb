@@ -5,16 +5,16 @@ YAML::ENGINE.yamler= 'syck' if defined?(YAML::ENGINE)
 root = File.expand_path('../../', __FILE__)
 lib_paths = [root] + %w(vendor lib vendor).collect { |dir| File.join(root, dir) }
 (lib_paths).each do |dir|
-  $:.unshift dir unless $:.include?(dir)
+  $LOAD_PATH.unshift dir unless $LOAD_PATH.include?(dir)
 end
 
 require 'akephalos'
 
 spec_dir = nil
-$:.detect do |dir|
+$LOAD_PATH.detect do |dir|
   if File.exists? File.join(dir, "capybara.rb")
     spec_dir = File.expand_path(File.join(dir,"..","spec"))
-    $:.unshift( spec_dir )
+    $LOAD_PATH.unshift( spec_dir )
   end
 end
                              
