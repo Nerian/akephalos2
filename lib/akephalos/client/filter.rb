@@ -14,7 +14,7 @@ module Akephalos
       # response.
       #
       # @param [WebRequest] request the pending HTTP request
-      # @return [WebResponseImpl] when the request matches a defined filter
+      # @return [WebResponse] when the request matches a defined filter
       # @return [nil] when no filters match the request
       def filter(request)
         if filter = find_filter(request)
@@ -28,7 +28,7 @@ module Akephalos
             HTTP_STATUS_CODES.fetch(filter[:status], "Unknown"),
             headers
           )
-          HtmlUnit::WebResponseImpl.new(response, request, Time.now - start_time)
+          HtmlUnit::WebResponse.new(response, request, Time.now - start_time)
         end
       end
 
@@ -49,7 +49,7 @@ module Akephalos
       #
       # @api htmlunit
       # @param [WebRequest] request the pending HTTP request
-      # @return [WebResponseImpl]
+      # @return [WebResponse]
       def getResponse(request)
         filter(request) || super
       end

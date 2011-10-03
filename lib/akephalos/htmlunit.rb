@@ -23,7 +23,7 @@ module HtmlUnit
   java_import "com.gargoylesoftware.htmlunit.SilentCssErrorHandler"
   java_import "com.gargoylesoftware.htmlunit.WebClient"
   java_import "com.gargoylesoftware.htmlunit.WebResponseData"
-  java_import "com.gargoylesoftware.htmlunit.WebResponseImpl"
+  java_import "com.gargoylesoftware.htmlunit.WebResponse"
 
   # Container module for com.gargoylesoftware.htmlunit.util namespace.
   module Util
