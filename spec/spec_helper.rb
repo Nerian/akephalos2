@@ -1,5 +1,6 @@
 require 'rubygems'
-require 'yaml'
+require "yaml"
+YAML::ENGINE.yamler= 'syck' if defined?(YAML::ENGINE)
 
 root = File.expand_path('../../', __FILE__)
 lib_paths = [root] + %w(vendor lib vendor).collect { |dir| File.join(root, dir) }
@@ -33,10 +34,7 @@ RSpec.configure do |config|
 
   config.filter_run_excluding(:platform => lambda { |value|
     return true if value == :jruby && !running_with_jruby
-  })                                   
-  
-  puts YAML::ENGINE.yamler
-  
+  })                                     
 end
 
 require File.join(spec_dir,"spec_helper")
