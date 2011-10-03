@@ -104,7 +104,7 @@ module Akephalos
     # @return [nil] if no frame is found
     def find_frame(id_or_index)
     	if id_or_index.is_a? Fixnum
-	    	frame = @_page.getFrames.get(id_or_index)
+	    	frame = @_page.getFrames.get(id_or_index) rescue nil
     	else	
     		frame = @_page.getFrames.find do |frame|
         		frame.getFrameElement.getAttribute("id") == id_or_index

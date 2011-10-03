@@ -18,6 +18,11 @@ describe Capybara::Session do
         end
       end
       
+      it "should return the usual exception when selecting a crazy index" do
+      	@session.visit('/iframe_selection_test')
+        expect { @session.within_frame(9999) {} }.should raise_error(Capybara::ElementNotFound)
+      end
+      
 	  it "should select iframe by id" do
 	    @session.visit('/iframe_selection_test')
         @session.within_frame('third') do
