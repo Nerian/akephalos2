@@ -99,20 +99,20 @@ module Akephalos
       @current_frame || @_page
     end
 
-	# @param [String/Integer] id the frame's id or index
+    # @param [String/Integer] id the frame's id or index
     # @return [HtmlUnit::HtmlPage] the specified frame
     # @return [nil] if no frame is found
     def find_frame(id_or_index)
     	if id_or_index.is_a? Fixnum
-	    	frame = @_page.getFrames[id_or_index]
+	    	frame = @_page.getFrames.get(id_or_index)
     	else	
-	    	puts @_page.getFrames.inspect
     		frame = @_page.getFrames.find do |frame|
-        	frame.getFrameElement.getAttribute("id") == id_or_index
-        end
-      end
-      frame.getEnclosedPage if frame
+        		frame.getFrameElement.getAttribute("id") == id_or_index
+        	end
+      	end
+      	frame.getEnclosedPage if frame
     end
+    
   end
 
 end

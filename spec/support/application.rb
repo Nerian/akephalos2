@@ -102,6 +102,22 @@ class Application < TestApp
   </body>
     HTML
   end
+  
+  
+  get '/derp_text' do "<body>derp</body>" end
+  get '/tasty_text' do "<body>tasty and delicious</body>" end
+  
+  get '/iframe_selection_test' do
+   <<-HTML
+  <body>
+    <p id="test">Test</p>
+    <iframe id="beefcake" src="/tasty_text" />
+    <p id="test2">Test2</p>
+    <iframe class="stupidiframewithoutid" src="/derp_text" />
+  </body>
+    HTML
+  end
+  
 end
 
 if $0 == __FILE__
