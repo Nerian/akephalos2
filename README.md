@@ -146,7 +146,7 @@ Firefox 3.6.
 ``` ruby
 Capybara.register_driver :akephalos do |app|
 	# available options:
-	#   :ie6, :ie7, :ie8, :firefox_3, :firefox_3_6
+	#   :ie6, :ie7, :ie8, :firefox_3_6
 	Capybara::Driver::Akephalos.new(app, :browser => :ie8)
 end     
 ```   

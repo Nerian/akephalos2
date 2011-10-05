@@ -50,7 +50,6 @@ else
         :ie6         => HtmlUnit::BrowserVersion::INTERNET_EXPLORER_6,
         :ie7         => HtmlUnit::BrowserVersion::INTERNET_EXPLORER_7,
         :ie8         => HtmlUnit::BrowserVersion::INTERNET_EXPLORER_8,
-        :firefox_3   => HtmlUnit::BrowserVersion::FIREFOX_3,
         :firefox_3_6 => HtmlUnit::BrowserVersion::FIREFOX_3_6
       }
 
