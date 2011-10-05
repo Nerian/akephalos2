@@ -76,6 +76,7 @@ else
           client.setCssErrorHandler(HtmlUnit::SilentCssErrorHandler.new)
           client.setThrowExceptionOnScriptError(validate_scripts)
           client.setUseInsecureSSL(use_insecure_ssl)
+          client.setRefreshHandler(HtmlUnit::WaitingRefreshHandler.new)
 
           Filter.new(client)
           client

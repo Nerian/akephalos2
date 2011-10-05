@@ -24,6 +24,7 @@ module HtmlUnit
   java_import "com.gargoylesoftware.htmlunit.WebClient"
   java_import "com.gargoylesoftware.htmlunit.WebResponseData"
   java_import "com.gargoylesoftware.htmlunit.WebResponse"
+  java_import "com.gargoylesoftware.htmlunit.WaitingRefreshHandler"
 
   # Container module for com.gargoylesoftware.htmlunit.util namespace.
   module Util
