@@ -1,6 +1,6 @@
 # Important Notice
 
-This repo has rewrote its history and as such is not compatible with the main Akephalos repo. 
+This repo has rewritten its history and as such is not compatible with the main Akephalos repo. 
 
 Further development will be done here.
  
@@ -32,7 +32,7 @@ gem 'akephalos2', :require => 'akephalos'
 Or (for the current master branch)  
 
 ``` ruby
-gem 'akephalos', :git => 'git://github.com/Nerian/akephalos.git'
+gem 'akephalos', :git => 'git://github.com/Nerian/akephalos.git', :submodules => true
 ```
 
 
