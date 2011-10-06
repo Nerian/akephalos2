@@ -1,10 +1,11 @@
 # Important Notice
 
 This repo has rewritten its history and as such is not compatible with the main Akephalos repo. 
-
-Further development will be done here.
  
-You can get the unaltered pristine copy at: [https://github.com/Nerian/akephalos](https://github.com/Nerian/akephalos)
+You can get the unaltered – before history rewrite – pristine copy at: [https://github.com/Nerian/akephalos](https://github.com/Nerian/akephalos)
+
+Further development will be done here:
+[https://github.com/Nerian/akephalos2](https://github.com/Nerian/akephalos2)
 
 The reason why its history was rewrote was to remove .jar vendor files that were making its size huge.
 
@@ -12,7 +13,7 @@ The reason why its history was rewrote was to remove .jar vendor files that were
 # Akephalos        
 
 Akephalos is a full-stack headless browser for integration testing with
-Capybara. It is built on top of [HtmlUnit](http://htmlunit.sourceforge.net),
+[Capybara](https://github.com/jnicklas/capybara). It is built on top of [HtmlUnit](http://htmlunit.sourceforge.net),
 a GUI-less browser for the Java platform, but can be run on both JRuby and
 MRI with no need for JRuby to be installed on the system.
 
@@ -35,6 +36,11 @@ Or (for the current master branch)
 gem 'akephalos', :git => 'git://github.com/Nerian/akephalos2.git', :submodules => true
 ```
 
+# Questions, bugs, etc:
+
+We use GitHub issues:
+
+[https://github.com/Nerian/akephalos2/issues](https://github.com/Nerian/akephalos2/issues)
 
 # Development
 
@@ -318,10 +324,3 @@ the vendored version and use it instead of the bundled version.
 #### akephalos --server <socket_file>
 
 Akephalos uses this command internally to start a JRuby DRb server using the provided socket file.
-
-## Resources
-
-* [API Documentation](http://bernerdschaefer.github.com/akephalos/api)
-* [Source code](http://github.com/bernerdschaefer/akephalos) and
-  [issues](http://github.com/bernerdschaefer/akephalos/issues) are hosted on
-  github.
