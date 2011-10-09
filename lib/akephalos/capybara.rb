@@ -251,9 +251,10 @@ class Capybara::Driver::Akephalos < Capybara::Driver::Base
     reset!
   end
 
-  # Clear all cookie session data.
+  # Reset session
   def reset!
     cookies.clear
+    browser.visit('about:blank')
   end
 
   # Confirm or cancel the dialog, returning the text of the dialog
