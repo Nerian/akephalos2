@@ -5,7 +5,7 @@ require "pathname"
 require "optparse"
 require 'rubygems'
 
-options = { :interactive => false, :default_jvm_max_memory => '256' }
+options = { :interactive => false, :default_jvm_max_memory => '128' }
 
 parser = OptionParser.new do |opts|
   opts.banner = "Usage: akephalos [--interactive, --use-htmlunit-snapshot, --memory [number]] | [--server] <port>"
