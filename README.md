@@ -136,7 +136,7 @@ ENV['akephalos_jvm_max_memory']
 ```                              
   
 
-The default value is 256 MB.
+The default value is 128 MB.
 
 If you use akephalos's bin the parameter `-m [memory]` sets the max memory for the JVM.
 
