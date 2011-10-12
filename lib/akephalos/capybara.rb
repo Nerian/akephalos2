@@ -54,7 +54,9 @@ class Capybara::Driver::Akephalos < Capybara::Driver::Base
 
     # @api capybara
     def select_option
-      native.click
+      #if it is already selected: do nothing
+      #if it isn't selected: click on it
+      native.click unless selected?
     end
 
     # Unselect an option from a select box.
