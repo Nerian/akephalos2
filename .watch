@@ -1,4 +1,0 @@
-$server = fork { Dir.chdir("docs/build") { system("python -m SimpleHTTPServer") } } unless $server
-watch('lib/.*') { system("rake docs:api") }
-watch('docs/.*.haml') { system("rake docs:static") }
-#watch('docs/.*.css') { system("rake docs:static") }
