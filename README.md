@@ -49,11 +49,10 @@ We use GitHub issues:
 </a>
 
 ``` bash
-git clone https://github.com/Nerian/akephalos2 
-git submodule update --init
+git clone --recursive https://github.com/Nerian/akephalos2 
 ```
 
-The last line will grab the HTMLUnit jar files from [https://github.com/Nerian/html-unit-vendor](https://github.com/Nerian/html-unit-vendor)
+The HTMLUnit files are located at [https://github.com/Nerian/html-unit-vendor](https://github.com/Nerian/html-unit-vendor) and are automatically downloaded as a submodule.
 
 Also, we have a .rvmrc file already cooked:
 
