@@ -1,13 +1,7 @@
 require "pathname"
 require "java"
 
-dependency_directory = $LOAD_PATH.detect { |path| Dir[File.join(path, 'html-unit/htmlunit-*.jar')].any? }
-
-raise "Could not find html-unit/htmlunit-VERSION.jar in load path:\n  [ #{$LOAD_PATH.join(",\n    ")}\n  ]" unless dependency_directory
-
-Dir[File.join(dependency_directory, "html-unit/*.jar")].each do |jar|
-  require jar
-end
+Dir[File.dirname(__FILE__) + "/../.." + "/vendor/html-unit/*.jar"].each {|file| require file }
 
 java.lang.System.setProperty("org.apache.commons.logging.Log", "org.apache.commons.logging.impl.SimpleLog")
 java.lang.System.setProperty("org.apache.commons.logging.simplelog.defaultlog", "fatal")
