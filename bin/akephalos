@@ -39,25 +39,25 @@ case
 when options[:use_htmlunit_snapshot]
   require "fileutils"
 
-  FileUtils.mkdir_p("vendor/htmlunit")
-  Dir["vendor/htmlunit/*.jar"].each { |jar| File.unlink(jar) }
+  FileUtils.mkdir_p("vendor/html-unit")
+  Dir["vendor/html-unit/*.jar"].each { |jar| File.unlink(jar) }
 
   Dir.chdir("vendor") do
     $stdout.print "Downloading latest snapshot... "
     $stdout.flush
-    %x[curl -O http://build.canoo.com/htmlunit/artifacts/htmlunit-2.10-SNAPSHOT-with-dependencies.zip &> /dev/null]
+    %x[curl -O http://build.canoo.com/htmlunit/artifacts/htmlunit-2.10-SNAPSHOT-with-dependencies.zip]
     puts "done"
 
     $stdout.print "Extracting dependencies... "
     $stdout.flush
-    %x[unzip -j -d htmlunit htmlunit-2.10-SNAPSHOT-with-dependencies.zip htmlunit-2.10-SNAPSHOT/lib htmlunit-2.10-SNAPSHOT/lib/* &> /dev/null]
+    %x[unzip -j -d html-unit htmlunit-2.10-SNAPSHOT-with-dependencies.zip htmlunit-2.10-SNAPSHOT/lib htmlunit-2.10-SNAPSHOT/lib/* &> /dev/null]
     puts "done"
 
     File.unlink "htmlunit-2.10-SNAPSHOT-with-dependencies.zip"
   end
 
   $stdout.puts "="*40
-  $stdout.puts "The latest HtmlUnit snapshot has been extracted to vendor/htmlunit!"
+  $stdout.puts "The latest HtmlUnit snapshot has been extracted to vendor/html-unit!"
 when options[:interactive]
   $LOAD_PATH.unshift('vendor', lib, src)
   require 'akephalos'
@@ -82,7 +82,8 @@ else
     java_args = [
      "-Xmx#{options[:akephalos_jvm_max_memory]}M",
       "-cp", [JRubyJars.core_jar_path, JRubyJars.stdlib_jar_path].join(File::PATH_SEPARATOR),
-      "org.jruby.Main"
+      "org.jruby.Main",
+      "-X+O"
     ]
     ruby_args = [ 
       "-Ku",
@@ -95,7 +96,7 @@ else
     # since the akephalos server doesn't have any gem dependencies and is
     # always executed with the same context, we clear RUBYOPT before running
     # exec.
-    ENV["RUBYOPT"] = ""
-    exec("java", *(java_args + ruby_args))
+    ENV["RUBYOPT"] = "--1.9"
+    exec("java", *(java_args + ruby_args))  
   end
 end
