@@ -82,15 +82,20 @@ Here's some sample RSpec code:
     
 ``` ruby
 describe "Home Page" do
-	before { visit "/" }
-	context "searching" do
-		before do
-			fill_in "Search", :with => "akephalos"
-			click_button "Go"
-		end
-		it "returns results" { page.should have_css("#results") }
-		it "includes the search term" { page.should have_content("akephalos") }
-	end
+  before { visit "/" }
+  
+  context "searching" do
+  
+    before do
+      fill_in "Search", :with => "akephalos" 
+      click_button "Go"
+    end
+    
+    it "returns results" { page.should have_css("#results") }
+    
+    it "includes the search term" { page.should have_content("akephalos") }
+  end
+  
 end 
 ```
 
@@ -101,9 +106,9 @@ Capybara allows you to perform your action on a context, for example inside a di
   <p id="test">Test</p>
   <iframe id="first" src="/one_text"></iframe>
   <p id="test2">Test2</p>
-	<iframe class="second" src="/two_text"></iframe>
-	<p id="test3">Test3</p>
-	<iframe id="third" src="/three_text"></iframe>
+  <iframe class="second" src="/two_text"></iframe>
+  <p id="test3">Test3</p>
+  <iframe id="third" src="/three_text"></iframe>
 </body>
 ```
 
@@ -112,12 +117,12 @@ You can operate within the context of iframe `test2` with any of these calls:
 ``` ruby
 # By ID
 within_frame("test2") do
-	....
+  ....
 end
 
 # By index
 within_frame(1) do
-	....
+  ....
 end
 ```
 
@@ -152,9 +157,9 @@ Firefox 3.6.
 
 ``` ruby
 Capybara.register_driver :akephalos do |app|
-	# available options:
-	#   :ie6, :ie7, :ie8, :firefox_3_6
-	Capybara::Driver::Akephalos.new(app, :browser => :ie8)
+  #  available options:
+  #  :ie6, :ie7, :ie8, :firefox_3_6
+  Capybara::Driver::Akephalos.new(app, :browser => :ie8)
 end     
 ```   
 
@@ -163,7 +168,7 @@ end
        
 ``` ruby         
 Capybara.register_driver :akephalos do |app|
-	Capybara::Driver::Akephalos.new(app, :http_proxy => 'myproxy.com', :http_proxy_port => 8080)
+  Capybara::Driver::Akephalos.new(app, :http_proxy => 'myproxy.com', :http_proxy_port => 8080)
 end 
 ```
 
@@ -179,7 +184,7 @@ ignore javascript errors.
            
 ``` ruby
 Capybara.register_driver :akephalos do |app|
-	Capybara::Driver::Akephalos.new(app, :validate_scripts => false)
+  Capybara::Driver::Akephalos.new(app, :validate_scripts => false)
 end 
 ```  
        
@@ -190,9 +195,9 @@ By default it uses the 'fatal' level. You can change that like this:
         
 ``` ruby
 Capybara.register_driver :akephalos do |app|  
-	# available options 
-	# "trace", "debug", "info", "warn", "error", or "fatal"
-	Capybara::Driver::Akephalos.new(app, :htmlunit_log_level => 'fatal')
+  # available options 
+  # "trace", "debug", "info", "warn", "error", or "fatal"
+  Capybara::Driver::Akephalos.new(app, :htmlunit_log_level => 'fatal')
 end 
 ```
        
@@ -201,13 +206,13 @@ end
          
 ``` ruby
 Spork.prefork do
-    ...
-	Akephalos::RemoteClient.manager                                 
+  ...
+  Akephalos::RemoteClient.manager                                 
 end
 
 Spork.each_run do 
-	...
-	Thread.current['DRb'] = { 'server' => DRb::DRbServer.new }
+  ...
+  Thread.current['DRb'] = { 'server' => DRb::DRbServer.new }
 end
 ```       
 
@@ -230,13 +235,13 @@ By default, all filtered requests will return an empty body with a 200 status co
    
 ``` ruby
 Akephalos.filter(:get, "http://google.com/missing", 
-	:status => 404, :body => "... <h1>Not Found</h1> ...")
+  :status => 404, :body => "... <h1>Not Found</h1> ...")
 
 Akephalos.filter(:post, "http://my-api.com/resource.xml",
-	:status => 201, :headers => {
-		"Content-Type" => "application/xml",
-		"Location" => "http://my-api.com/resources/1.xml" },
-	:body => {:id => 100}.to_xml)	
+  :status => 201, :headers => {
+    "Content-Type" => "application/xml",
+    "Location" => "http://my-api.com/resources/1.xml" },
+    :body => {:id => 100}.to_xml)	
 ```    
 
                                          
@@ -248,7 +253,7 @@ Google Analytics code is passively applied based on HTML comments, so simply ret
 
 ``` ruby
 Akephalos.filter(:get, "http://www.google-analytics.com/ga.js",
-	:headers => {"Content-Type" => "application/javascript"})    
+  :headers => {"Content-Type" => "application/javascript"})    
 ```       
 
 
@@ -256,15 +261,15 @@ Google Maps requires the most extensive amount of API definitions of the three, 
 
 ``` ruby
 Akephalos.filter(:get, "http://maps.google.com/maps/api/js?sensor=false",
-	:headers => {"Content-Type" => "application/javascript"},
-	:body => "window.google = {
-		maps: {
-			LatLng: function(){},
-			Map: function(){},
-			Marker: function(){},
-			MapTypeId: {ROADMAP:1}
-		}
-	};") 
+  :headers => {"Content-Type" => "application/javascript"},
+  :body => "window.google = {
+    maps: {
+      LatLng: function(){},
+      Map: function(){},
+      Marker: function(){},
+      MapTypeId: {ROADMAP:1}
+    }
+   };") 
 ```  
 
 		
@@ -276,9 +281,9 @@ When you enable Facebook Connect on your page, the FeatureLoader is requested, a
 
 ``` ruby
 Akephalos.filter(:get, 
-	"http://static.ak.connect.facebook.com/js/api_lib/v0.4/FeatureLoader.js.php",
-	:headers => {"Content-Type" => "application/javascript"},
-	:body => "window.FB_RequireFeatures = function() {};")    
+  "http://static.ak.connect.facebook.com/js/api_lib/v0.4/FeatureLoader.js.php",
+  :headers => {"Content-Type" => "application/javascript"},
+  :body => "window.FB_RequireFeatures = function() {};")    
 ```        
 
 		
@@ -294,11 +299,11 @@ Running Akephalos in interactive mode gives you an IRB context for interacting w
          
 ``` ruby
 $ akephalos --interactive
-	->	Capybara.app_host # => "http://localhost:3000"
-	->	page.visit "/"
-	->	page.fill_in "Search", :with => "akephalos"
-	->	page.click_button "Go"
-	->	page.has_css?("#search_results") # => true  
+  ->  Capybara.app_host # => "http://localhost:3000"
+  ->  page.visit "/"
+  ->  page.fill_in "Search", :with => "akephalos"
+  ->  page.click_button "Go"
+  ->  page.has_css?("#search_results") # => true  
 ```
 	     
 	
