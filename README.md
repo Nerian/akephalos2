@@ -81,6 +81,8 @@ RSpec, Cucumber, and Test::Unit.
 Here's some sample RSpec code:
     
 ``` ruby
+# encoding: utf-8
+
 describe "Home Page" do
   before { visit "/" }
   
@@ -98,6 +100,8 @@ describe "Home Page" do
   
 end 
 ```
+
+Akephalos uses UTF-8 encoding. You may need to add `# encoding: utf-8` at the first line of your test.
 
 Capybara allows you to perform your action on a context, for example inside a div or a frame. With Akephalos you can select the frame either by id or by index.
 
