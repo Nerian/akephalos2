@@ -1,3 +1,4 @@
+# encoding: utf-8
 class Application < TestApp
   get '/slow_page' do
     sleep 1
@@ -73,6 +74,7 @@ class Application < TestApp
     <p id="line_feed">&#10;original&#10; html&#10;</p>
     <p id="carriage_return">&#13;original&#13; html&#13;</p>
     <p id="non_breaking_space">&#160;original&#160; html&#160;</p>
+    <p id="utf">   uʍop ǝpısdn ɯ,ı 'ǝɯ ʇɐ ʞooן |</p>
   </body>
     HTML
   end
