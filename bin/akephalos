@@ -96,7 +96,11 @@ else
     # since the akephalos server doesn't have any gem dependencies and is
     # always executed with the same context, we clear RUBYOPT before running
     # exec.
-    ENV["RUBYOPT"] = "--1.9" unless ENV['JRUBY_1_8']
+    if ENV['JRUBY_1_8']
+      ENV["RUBYOPT"] = ''
+    else
+      ENV["RUBYOPT"] = "--1.9"
+    end
     exec("java", *(java_args + ruby_args))  
   end
 end
