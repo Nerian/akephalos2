@@ -256,6 +256,7 @@ class Capybara::Driver::Akephalos < Capybara::Driver::Base
   # Reset session
   def reset!
     cookies.clear
+    browser.close_all_windows()
     browser.visit('about:blank')
   end
 

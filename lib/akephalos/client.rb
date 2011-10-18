@@ -175,6 +175,10 @@ else
         yield if block_given?
         return handler.text
       end
+      
+      def close_all_windows()
+        @client.closeAllWindows()
+      end
 
       private
 
