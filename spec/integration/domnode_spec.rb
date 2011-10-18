@@ -16,6 +16,8 @@ describe Capybara::Session do
       @session.find(:css, "p#line_feed").text.should           == "original html"
       @session.find(:css, "p#carriage_return").text.should     == "original html"
       @session.find(:css, "p#non_breaking_space").text.should  == " original  html "
+      @session.find(:css, "p#utf").text.should  == "uʍop ǝpısdn ɯ,ı 'ǝɯ ʇɐ ʞooן |"
+      
     end
 
     it "Element#native#text_content will return raw text including whitespace" do
@@ -26,6 +28,7 @@ describe Capybara::Session do
       @session.find(:css, "p#line_feed").native.text_content.should          == "\noriginal\n html\n"
       @session.find(:css, "p#carriage_return").native.text_content.should    == "\roriginal\r html\r"
       @session.find(:css, "p#non_breaking_space").native.text_content.should ==  "\302\240original\302\240 html\302\240"
+      @session.find(:css, "p#utf").native.text_content.should  == "   uʍop ǝpısdn ɯ,ı 'ǝɯ ʇɐ ʞooן |"
     end
 
     it "Element#native#xml will return the current DOM from the node as xml" do
