@@ -30,7 +30,7 @@ task :release => 'build:all' do
   system "git push --tags"
   puts "Pushing to Gemcutter..."
   ["", "-java"].each do |platform|
-    system "gem push akephalos-#{Akephalos::VERSION}#{platform}.gem"
+    system "gem push akephalos2-#{Akephalos::VERSION}#{platform}.gem"
   end
 end
 
