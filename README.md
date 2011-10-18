@@ -101,7 +101,12 @@ describe "Home Page" do
 end 
 ```
 
-Akephalos uses UTF-8 encoding. You may need to add `# encoding: utf-8` at the first line of your test.
+### Encoding
+
+Akephalos uses UTF-8 encoding by default. You may need to add `# encoding: utf-8` at the first line of your test. This behavior is the default using JRuby in 1.9 mode, but you can use JRuby in 1.8 mode by setting the environment variable `ENV['JRUBY_1_8']=true`. Note that Akephalos works with MRI. I refer here to the JRuby that is used internally by Akephalos.
+
+
+### Frames
 
 Capybara allows you to perform your action on a context, for example inside a div or a frame. With Akephalos you can select the frame either by id or by index.
 
