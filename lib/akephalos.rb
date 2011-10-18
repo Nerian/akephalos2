@@ -13,7 +13,3 @@ end
 require 'akephalos/client'
 require 'capybara'
 require 'akephalos/capybara'
-
-Capybara.register_driver :akephalos do |app|
-  Capybara::Driver::Akephalos.new(app)
-end
