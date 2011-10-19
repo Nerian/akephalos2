@@ -28,7 +28,8 @@ class Application < TestApp
   
   get '/js_click' do
     if request.xhr?
-    	(params[:number_1].to_i + params[:number_2].to_i).to_s
+    	answer = (params[:number_1].to_i + params[:number_2].to_i).to_s
+    	erb answer, :layout => false
     else
       <<-HTML
         <head><script src="https://ajax.googleapis.com/ajax/libs/mootools/1.4.1/mootools-yui-compressed.js" type="text/javascript"></script></head>
@@ -36,7 +37,7 @@ class Application < TestApp
           function answer ()
           {
           	new Request.HTML({
-          		url: '/',
+          		url: '/js_click',
           		method: 'get',
           		update: 'answer',
           		data: {
