@@ -164,9 +164,8 @@ module Akephalos
     # Click the node and then wait for any triggered JavaScript callbacks to
     # fire.
     def click
-      @_node.getPage.getWebClient.waitForBackgroundJavaScriptStartingBefore(2000)
       @_node.click
-      sleep 3      
+      @_node.getPage.getWebClient.waitForBackgroundJavaScriptStartingBefore(3000)
     end
 
     # Search for child nodes which match the given XPath selector.
