@@ -4,7 +4,7 @@
 # development environment upon cd'ing into the directory
 
 # First we specify our desired <ruby>[@<gemset>], the @gemset name is optional.
-environment_id="ruby-1.9.3-rc1@akephalos2"
+environment_id="ruby-1.9.3-p0@akephalos2"
 
 #
 # Uncomment following line if you want options to be set only for given project.
@@ -31,7 +31,7 @@ else
   if ! rvm --create  "$environment_id"
   then
     echo "Failed to create RVM environment '${environment_id}'."
-    exit 1
+    return 1
   fi
 fi
 
@@ -52,4 +52,10 @@ fi
 #   bundle install
 # fi
 
+if [[ $- == *i* ]] # check for interactive shells
+then
+    echo "Using: $(tput setaf 2)$GEM_HOME$(tput sgr0)" # show the user the ruby and gemset they are using in green
+else 
+	echo "Using: $GEM_HOME" # don't use colors in interactive shells
+fi
 
