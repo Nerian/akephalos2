@@ -8,8 +8,8 @@ Gem::Specification.new do |s|
   s.name              = "akephalos2"
   s.version           = Akephalos::VERSION
   s.platform          = ENV["PLATFORM"] || "ruby"
-  s.authors           = ["Bernerd Schaefer"]
-  s.email             = "bj.schaefer@gmail.com"
+  s.authors           = ["Bernerd Schaefer", "Gonzalo Rodríguez-Baltanás Díaz"]
+  s.email             = ["bj.schaefer@gmail.com", "siotopo@gmail.com"]
   s.homepage          = "https://github.com/Nerian/akephalos2"
   s.summary           = "Headless Browser for Integration Testing with Capybara"
   s.description       = s.summary
