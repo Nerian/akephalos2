@@ -33,7 +33,7 @@ gem 'akephalos2', :require => 'akephalos'
 Or (for the current master branch)  
 
 ``` ruby
-gem 'akephalos', :git => 'git://github.com/Nerian/akephalos2.git', :submodules => true
+gem 'akephalos2', :git => 'git://github.com/Nerian/akephalos2.git', :submodules => true
 ```
 
 # Questions, bugs, etc:
