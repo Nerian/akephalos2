@@ -13,7 +13,6 @@ Gem::Specification.new do |s|
   s.homepage          = "https://github.com/Nerian/akephalos2"
   s.summary           = "Headless Browser for Integration Testing with Capybara"
   s.description       = s.summary
-  s.rubyforge_project = "akephalos"
 
   s.add_runtime_dependency "capybara"
   s.add_runtime_dependency "rake"
