@@ -6,4 +6,7 @@ rvm:
   - jruby  
 before_script:
   - git submodule update --init
+  - mkdir .akephalos
+  - mkdir .akephalos/2.9
+  - cp -r vendor/html-unit/ .akephalos/2.9/
 script: "bundle exec rspec spec -f p"  
