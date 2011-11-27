@@ -33,7 +33,7 @@ gem 'akephalos2', :require => 'akephalos'
 Or (for the current master branch)
 
 ``` ruby
-gem 'akephalos2', :git => 'git://github.com/Nerian/akephalos2.git', :submodules => true
+gem 'akephalos2', :git => 'git://github.com/Nerian/akephalos2.git'
 ```
 
 Akephalos creates a `.akephalos` folder where it stores HTMLUnit binaries. You should set Git to ignore that folder.
@@ -55,10 +55,8 @@ We use GitHub issues:
 </a>
 
 ``` bash
-git clone --recursive https://github.com/Nerian/akephalos2
+git clone https://github.com/Nerian/akephalos2
 ```
-
-The HTMLUnit files are located at [https://github.com/Nerian/html-unit-vendor](https://github.com/Nerian/html-unit-vendor) and are automatically downloaded as a submodule.
 
 Also, we have a .rvmrc file already cooked:
 
