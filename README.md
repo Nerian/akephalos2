@@ -172,7 +172,7 @@ ENV["htmlunit_version"] = "2.8"
 ENV["htmlunit_version"] = "2.7"
 ```
 
-It defaults to HtmlUnit 2.9
+It defaults to HtmlUnit 2.9. You can manually download or copy your own version to .akephalos/:version and use it with `ENV["htmlunit_version"] = "version"`
 
 ### Using a different browser
 
