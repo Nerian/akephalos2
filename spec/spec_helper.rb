@@ -31,8 +31,10 @@ RSpec.configure do |config|
     pending "drag and drop is not supported yet"
   end
   
-  config.before(:suite) do
-    `rm -rf .akephalos`
+  unless ENV['TRAVIS']
+    config.before(:suite) do
+      `rm -rf .akephalos`
+    end
   end
 
   config.filter_run_excluding(:platform => lambda { |value|
