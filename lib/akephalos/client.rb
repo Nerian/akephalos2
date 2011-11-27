@@ -3,7 +3,7 @@ require 'akephalos/configuration'
 if RUBY_PLATFORM != "java"
   require 'akephalos/remote_client'
   Akephalos::Client = Akephalos::RemoteClient
-else
+else  
   require 'akephalos/htmlunit'
   require 'akephalos/htmlunit/ext/http_method'
   require 'akephalos/htmlunit/ext/confirm_handler'
@@ -12,7 +12,7 @@ else
   require 'akephalos/node'
 
   require 'akephalos/client/cookies'
-  require 'akephalos/client/filter'
+  require 'akephalos/client/filter'  
 
   module Akephalos
 
@@ -150,7 +150,7 @@ else
       # validate scripts, and htmlunit log level.
       #
       # @param [Hash] options the options to process
-      def process_options!(options)
+      def process_options!(options)        
         options = DEFAULT_OPTIONS.merge(options)
 
         @browser_version  = BROWSER_VERSIONS.fetch(options.delete(:browser))
@@ -158,7 +158,7 @@ else
         @use_insecure_ssl = options.delete(:use_insecure_ssl)
         @htmlunit_log_level = options.delete(:htmlunit_log_level)
         @http_proxy = options.delete(:http_proxy)
-        @http_proxy_port = options.delete(:http_proxy_port)
+        @http_proxy_port = options.delete(:http_proxy_port)        
 
         java.lang.System.setProperty("org.apache.commons.logging.simplelog.defaultlog", @htmlunit_log_level)
       end

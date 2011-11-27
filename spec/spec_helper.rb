@@ -30,6 +30,10 @@ RSpec.configure do |config|
   config.before(:each, :full_description => /drag and drop/) do
     pending "drag and drop is not supported yet"
   end
+  
+  config.before(:suite) do
+    `rm -rf .akephalos`
+  end
 
   config.filter_run_excluding(:platform => lambda { |value|
     return true if value == :jruby && !running_with_jruby
