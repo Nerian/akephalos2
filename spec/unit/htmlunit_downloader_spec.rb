@@ -45,6 +45,6 @@ describe "Integration test" do
   it "should set up htmlunit 2.9" do
     `rm -rf .akephalos`
     HtmlUnit.download_htmlunit("2.9")
-    File.exist?(".akephalos/2.9/htmlunit-2.9.jar")
+    File.exist?(".akephalos/2.9/htmlunit-2.9.jar").should == true
   end
 end
