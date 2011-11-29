@@ -19,6 +19,8 @@ end
                              
 RSpec.configure do |config|
   running_with_jruby = RUBY_PLATFORM =~ /java/
+  
+  config.treat_symbols_as_metadata_keys_with_true_values = true
 
   warn "[AKEPHALOS] ** Skipping JRuby-only specs" unless running_with_jruby
 
@@ -29,6 +31,12 @@ RSpec.configure do |config|
 
   config.before(:each, :full_description => /drag and drop/) do
     pending "drag and drop is not supported yet"
+  end
+  
+  unless ENV['TRAVIS']
+    config.before(:suite) do
+      `rm -rf .akephalos`
+    end
   end
 
   config.filter_run_excluding(:platform => lambda { |value|
