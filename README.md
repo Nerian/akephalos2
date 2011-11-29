@@ -7,7 +7,7 @@ You can get the unaltered – before history rewrite – pristine copy at: [http
 Further development will be done here:
 [https://github.com/Nerian/akephalos2](https://github.com/Nerian/akephalos2)
 
-The reason why its history was rewrote was to remove .jar vendor files that were making its size huge.
+Its history was rewritten in order to remove .jar vendor files that were making its size huge.
 
 
 # Akephalos
@@ -16,6 +16,8 @@ Akephalos is a full-stack headless browser for integration testing with
 [Capybara](https://github.com/jnicklas/capybara). It is built on top of [HtmlUnit](http://htmlunit.sourceforge.net),
 a GUI-less browser for the Java platform, but can be run on both JRuby and
 MRI with no need for JRuby to be installed on the system.
+
+The name Akephalos /ā-sĕf'ə-ləs/ comes from the Greek ἀκέφαλος akephalos, which literally means "headless".
 
 
 ## Installation
@@ -42,11 +44,13 @@ Akephalos creates a `.akephalos` folder where it stores HTMLUnit binaries. You s
 git ignore .akephalos
 ```
 
+
 # Questions, bugs, etc:
 
 We use GitHub issues:
 
 [https://github.com/Nerian/akephalos2/issues](https://github.com/Nerian/akephalos2/issues)
+
 
 # Development
 
@@ -64,6 +68,7 @@ Also, we have a .rvmrc file already cooked:
 cp .rvmrc.example .rvmrc
 ```
 
+
 ## Setup
 
 Configuring akephalos is as simple as requiring it and setting Capybara's
@@ -73,6 +78,7 @@ javascript driver:
 require 'akephalos'
 Capybara.javascript_driver = :akephalos
 ```
+
 
 ## Basic Usage
 
@@ -104,6 +110,7 @@ describe "Home Page" do
 
 end
 ```
+
 
 ### Encoding
 
@@ -144,6 +151,7 @@ end
 There are now a few configuration options available through Capybara's new
 `register_driver` API.
 
+
 ### Configure the max memory that Java Virtual Machine can use
 
 The max memory that the JVM is going to use can be set using an environment variable in your spec_helper or .bashrc file.
@@ -152,6 +160,7 @@ The max memory that the JVM is going to use can be set using an environment vari
 ENV['akephalos_jvm_max_memory']
 ```
 
+
 The default value is 128 MB.
 
 If you use Akephalos's bin the parameter `-m [memory]` sets the max memory for the JVM.
@@ -159,6 +168,7 @@ If you use Akephalos's bin the parameter `-m [memory]` sets the max memory for t
 ``` bash
 $ akephalos -m 670
 ```
+
 
 ### Configure the version of HTMLUnit
 
@@ -316,6 +326,7 @@ Akephalos.filter(:get,
 #### bin/akephalos
 
 The bundled akephalos binary provides a command line interface to a few useful features.
+
 
 #### akephalos --interactive
 
