@@ -7,7 +7,7 @@ You can get the unaltered – before history rewrite – pristine copy at: [http
 Further development will be done here:
 [https://github.com/Nerian/akephalos2](https://github.com/Nerian/akephalos2)
 
-The reason why its history was rewrote was to remove .jar vendor files that were making its size huge.
+Its history was rewritten in order to remove .jar vendor files that were making its size huge.
 
 
 # Akephalos
