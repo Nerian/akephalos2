@@ -165,6 +165,7 @@ $ akephalos -m 670
 The Htmlunit version is configured with a environmental variable named `htmlunit_version`. The possible versions are listed at [here](http://sourceforge.net/projects/htmlunit/files/htmlunit/)
 
 ```
+ENV["htmlunit_version"] = "2.10"  # Development Snapshots
 ENV["htmlunit_version"] = "2.9"
 ENV["htmlunit_version"] = "2.8"
 ENV["htmlunit_version"] = "2.7"

@@ -47,4 +47,10 @@ describe "Integration test" do
     HtmlUnit.download_htmlunit("2.9")
     File.exist?(".akephalos/2.9/htmlunit-2.9.jar").should == true
   end
+  
+  it "should set up htmlunit 2.10" do
+    `rm -rf .akephalos`
+    HtmlUnit.download_htmlunit("2.10")
+    File.exist?(".akephalos/2.10/htmlunit-2.10-SNAPSHOT.jar").should == true
+  end
 end
