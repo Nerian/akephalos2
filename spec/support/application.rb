@@ -25,6 +25,37 @@ class Application < TestApp
   </body>
     HTML
   end
+  
+  get '/js_click' do
+    if request.xhr?
+    	answer = (params[:number_1].to_i + params[:number_2].to_i).to_s
+    	erb answer, :layout => false
+    else
+      <<-HTML
+        <head><script src="https://ajax.googleapis.com/ajax/libs/mootools/1.4.1/mootools-yui-compressed.js" type="text/javascript"></script></head>
+        <script>
+          function answer ()
+          {
+          	new Request.HTML({
+          		url: '/js_click',
+          		method: 'get',
+          		update: 'answer',
+          		data: {
+          			number_1: $('number-1').get('value'),
+          			number_2: $('number-2').get('value')
+          		}
+          	}).send();
+          }
+        </script>
+        <p><label for="number-1">Number 1</label>: <input type="text" id="number-1" /></p>
+        <p><label for="number-2">Number 2</label>: <input type="text" id="number-2" /></p>
+
+        <p><label for="answer">Answer</label>:<span id="answer" style="margin-left: 4px"></span></p>
+
+        <p><input onclick="answer();" type="button" value="Answer"/></p>
+      HTML
+    end
+  end
 
   get '/user_agent_detection' do
     request.user_agent
