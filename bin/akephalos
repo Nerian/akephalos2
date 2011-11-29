@@ -87,9 +87,10 @@ else
       "org.jruby.Main",
       "-X+O"
     ]
+    
     ruby_args = [
       "-Ku",
-      "-I", [".akephalos/#{ENV["htmlunit_version"]}", lib, src].join(File::PATH_SEPARATOR),
+      "-I", ["#{Dir.pwd}/.akephalos/#{ENV['htmlunit_version']}", lib, src].join(File::PATH_SEPARATOR),
       "-r", "akephalos/server",
       "-e", "Akephalos::Server.start!(#{port.inspect})"
     ]
