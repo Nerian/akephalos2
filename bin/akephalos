@@ -4,8 +4,9 @@
 require "pathname"
 require "optparse"
 require 'rubygems'
+require "akephalos/htmlunit_downloader"
 
-options = { :interactive => false, :default_jvm_max_memory => '128' }
+options = { :interactive => false, :default_jvm_max_memory => '128'}
 
 parser = OptionParser.new do |opts|
   opts.banner = "Usage: akephalos [--interactive, --use-htmlunit-snapshot, --memory [number]] | [--server] <port>"
@@ -13,19 +14,20 @@ parser = OptionParser.new do |opts|
   opts.on("-i", "--interactive", "Run in interactive mode") { options[:interactive] = true }
   opts.on("--use-htmlunit-snapshot", "Use the snapshot of htmlunit") { options[:use_htmlunit_snapshot] = true }
   opts.on("-m", "--memory [number]", "Max memory for the Java Virtual Machine, defaults to #{options[:default_jvm_max_memory]}
-  or env variable $akephalos_jvm_max_memory") do |memory| 
+  or env variable $akephalos_jvm_max_memory") do |memory|
     options[:akephalos_jvm_max_memory] = memory.to_s
-  end       
-  
+  end
+
   if options[:akephalos_jvm_max_memory].nil?
-    if ENV['akephalos_jvm_max_memory'].nil?     
+    if ENV['akephalos_jvm_max_memory'].nil?
       options[:akephalos_jvm_max_memory] = options[:default_jvm_max_memory]
     else
       options[:akephalos_jvm_max_memory] = ENV['akephalos_jvm_max_memory']
     end
-  end  
-  
-  puts "Using #{options[:akephalos_jvm_max_memory]} MB for the JVM"                           
+  end
+  puts "Using #{options[:akephalos_jvm_max_memory]} MB for the JVM"
+
+  HtmlUnit.download_htmlunit(ENV["htmlunit_version"])
 
   opts.on_tail("-h", "--help", "Show this message") { puts opts; exit }
 end
@@ -74,10 +76,10 @@ else
     require 'akephalos/server'
     Akephalos::Server.start!(port)
   else
-    require 'jruby-jars'              
+    require 'jruby-jars'
 
     jruby = JRubyJars.core_jar_path
-    jruby_stdlib = JRubyJars.stdlib_jar_path          
+    jruby_stdlib = JRubyJars.stdlib_jar_path
 
     java_args = [
      "-Xmx#{options[:akephalos_jvm_max_memory]}M",
@@ -85,7 +87,7 @@ else
       "org.jruby.Main",
       "-X+O"
     ]
-    ruby_args = [ 
+    ruby_args = [
       "-Ku",
       "-I", ["vendor", lib, src].join(File::PATH_SEPARATOR),
       "-r", "akephalos/server",
@@ -101,6 +103,6 @@ else
     else
       ENV["RUBYOPT"] = "--1.9"
     end
-    exec("java", *(java_args + ruby_args))  
+    exec("java", *(java_args + ruby_args))
   end
 end
