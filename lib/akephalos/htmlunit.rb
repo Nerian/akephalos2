@@ -1,7 +1,7 @@
 require "pathname"
 require "java"
 
-Dir[".akephalos/#{ENV['htmlunit_version']}/*.jar"].each {|file| require file }
+Dir["#{Dir.pwd}/.akephalos/#{ENV['htmlunit_version']}/*.jar"].each {|file| require file }
 
 java.lang.System.setProperty("org.apache.commons.logging.Log", "org.apache.commons.logging.impl.SimpleLog")
 java.lang.System.setProperty("org.apache.commons.logging.simplelog.defaultlog", "fatal")
