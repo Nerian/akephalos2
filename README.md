@@ -35,7 +35,13 @@ gem 'akephalos2', :require => 'akephalos'
 Or (for the current master branch)
 
 ``` ruby
-gem 'akephalos2', :git => 'git://github.com/Nerian/akephalos2.git', :submodules => true
+gem 'akephalos2', :git => 'git://github.com/Nerian/akephalos2.git'
+```
+
+Akephalos creates a `.akephalos` folder where it stores HTMLUnit binaries. You should set Git to ignore that folder.
+
+```
+git ignore .akephalos
 ```
 
 
@@ -53,10 +59,8 @@ We use GitHub issues:
 </a>
 
 ``` bash
-git clone --recursive https://github.com/Nerian/akephalos2
+git clone https://github.com/Nerian/akephalos2
 ```
-
-The HTMLUnit files are located at [https://github.com/Nerian/html-unit-vendor](https://github.com/Nerian/html-unit-vendor) and are automatically downloaded as a submodule.
 
 Also, we have a .rvmrc file already cooked:
 
@@ -148,7 +152,7 @@ There are now a few configuration options available through Capybara's new
 `register_driver` API.
 
 
-### Configuring the max memory that Java Virtual Machine can use
+### Configure the max memory that Java Virtual Machine can use
 
 The max memory that the JVM is going to use can be set using an environment variable in your spec_helper or .bashrc file.
 
@@ -159,12 +163,25 @@ ENV['akephalos_jvm_max_memory']
 
 The default value is 128 MB.
 
-If you use akephalos's bin the parameter `-m [memory]` sets the max memory for the JVM.
+If you use Akephalos's bin the parameter `-m [memory]` sets the max memory for the JVM.
 
 ``` bash
 $ akephalos -m 670
 ```
 
+
+### Configure the version of HTMLUnit
+
+The Htmlunit version is configured with a environmental variable named `htmlunit_version`. The possible versions are listed at [here](http://sourceforge.net/projects/htmlunit/files/htmlunit/)
+
+```
+ENV["htmlunit_version"] = "2.10"  # Development Snapshots
+ENV["htmlunit_version"] = "2.9"
+ENV["htmlunit_version"] = "2.8"
+ENV["htmlunit_version"] = "2.7"
+```
+
+It defaults to HtmlUnit 2.9. You can manually download or copy your own version to .akephalos/:version and use it with `ENV["htmlunit_version"] = "version"`
 
 ### Using a different browser
 
