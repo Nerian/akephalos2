@@ -27,6 +27,7 @@ parser = OptionParser.new do |opts|
   end
   puts "Using #{options[:akephalos_jvm_max_memory]} MB for the JVM"
 
+  ENV['htmlunit_version'] ||= "2.9"
   HtmlUnit.download_htmlunit(ENV["htmlunit_version"])
 
   opts.on_tail("-h", "--help", "Show this message") { puts opts; exit }
