@@ -3,6 +3,8 @@ notifications:
 rvm:
   - 1.9.3
   - jruby
+env: 
+  - JRUBY_OPTS="--1.9"
 before_script:
   - git clone git://github.com/Nerian/html-unit-vendor.git .akephalos/2.9
 script: "bundle exec rspec spec -f p"
