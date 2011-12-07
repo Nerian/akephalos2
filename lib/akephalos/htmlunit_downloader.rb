@@ -17,7 +17,7 @@ module HtmlUnit
   end
 
   def self.unzip(version)
-    `tar xzf htmlunit-#{version}.zip`
+    `unzip htmlunit-#{version}.zip`
     `mv -f htmlunit-2.10-SNAPSHOT htmlunit-2.10 > /dev/null 2>&1`
     `cp -r htmlunit-#{version}/lib/ .akephalos/#{version}/`
   end
