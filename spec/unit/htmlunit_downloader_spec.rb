@@ -1,4 +1,4 @@
-require_relative "../../lib/akephalos/htmlunit_downloader"
+require 'spec_helper'
 
 unless ENV['TRAVIS']
   describe "Download HTMLUnit" do

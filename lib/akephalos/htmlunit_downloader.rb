@@ -1,5 +1,6 @@
 module HtmlUnit
   def self.download_htmlunit(version)
+    version ||= "2.9"
     if not version_exist?(version)
       puts "Installing HTMLUnit #{version} at .akephalos/#{version}/"
       Dir.mkdir(".akephalos") unless File.exists?(".akephalos")
