@@ -44,6 +44,21 @@ Akephalos creates a `.akephalos` folder where it stores HTMLUnit binaries. You s
 git ignore .akephalos
 ```
 
+### Windows
+
+You will need to manually download HTMLUnit, extract it and save it to `.akephalos/:version`.
+
+http://sourceforge.net/projects/htmlunit/files/htmlunit/
+
+For example:
+ 
+* Download [htmlunit-2.9-bin.zip](http://sourceforge.net/projects/htmlunit/files/latest/download?source=files) 
+* Extract it
+* You will get a folder named `htmlunit-2.9`. Rename it to just `2.9`
+* Create the folder `.akephalos` in your project folder
+* Move the `2.9` folder inside `.akephalos`
+
+You are done, run your tests.
 
 # Questions, bugs, etc:
 
