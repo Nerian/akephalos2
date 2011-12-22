@@ -20,6 +20,10 @@ Gem::Specification.new do |s|
   if RUBY_PLATFORM != "java" && ENV["PLATFORM"] != "java"
     s.add_runtime_dependency "jruby-jars"
   end
+  
+  if RUBY_PLATFORM =~ /mingw32/
+    s.add_runtime_dependency "win32-process"
+  end
 
   s.add_development_dependency "sinatra"
   s.add_development_dependency "rspec"

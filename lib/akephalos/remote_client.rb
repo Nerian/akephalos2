@@ -62,7 +62,14 @@ module Akephalos
 
       # Ensure that the remote server shuts down gracefully when we are
       # finished.
-      at_exit { Process.kill(:INT, remote_client.pid) }
+      at_exit {
+        if RUBY_PLATFORM =~ /mingw32/      
+          require 'win32/process'
+          Process.kill(1, remote_client.pid)
+        else
+          Process.kill(:INT, remote_client.pid)
+        end
+      }
 
       port
     end
