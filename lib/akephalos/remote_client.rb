@@ -14,13 +14,13 @@ module Akephalos
   #     client = Akephalos::RemoteClient.new
   #     client.visit "http://www.oinopa.com"
   #     client.page.source # => "<!DOCTYPE html PUBLIC..."
-  class RemoteClient           
-    
+  class RemoteClient
+
     # @return [DRbObject] a new instance of Akephalos::Client from the DRb
     #   server
     def self.new(options = {})
-      manager.new_client(options)      
-    end                   
+      manager.new_client(options)
+    end
 
     # Starts a remove JRuby DRb server unless already running and returns an
     # instance of Akephalos::ClientManager.
@@ -41,12 +41,12 @@ module Akephalos
       manager.configuration = Akephalos.configuration.extend(DRbUndumped)
 
       @manager = manager
-    end           
+    end
 
     # Start a remote server process and return when it is available for use.
     def self.start!
-      port = find_available_port                                                                           
-                                                      
+      port = find_available_port
+
       remote_client = IO.popen("ruby #{Akephalos::BIN_DIR + 'akephalos'} #{port}")
 
       # Set up a monitor thread to detect if the forked server exits
@@ -63,9 +63,8 @@ module Akephalos
       # Ensure that the remote server shuts down gracefully when we are
       # finished.
       at_exit {
-        if RUBY_PLATFORM =~ /mingw32/      
-          require 'win32/process'
-          Process.kill(1, remote_client.pid)
+        if RbConfig::CONFIG['host_os'] =~ /mswin|mingw/
+          system("taskkill /PID #{remote_client.pid} /F /T")
         else
           Process.kill(:INT, remote_client.pid)
         end
