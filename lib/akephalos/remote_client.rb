@@ -1,10 +1,6 @@
 require 'socket'
 require 'drb/drb'
 
-# We need to define our own NativeException class for the cases when a native
-# exception is raised by the JRuby DRb server.
-class NativeException < StandardError; end
-
 module Akephalos
 
   # The +RemoteClient+ class provides an interface to an +Akephalos::Client+

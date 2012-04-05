@@ -8,6 +8,7 @@ else
   require 'akephalos/htmlunit/ext/http_method'
   require 'akephalos/htmlunit/ext/confirm_handler'
 
+  require 'akephalos/exception_handling_delegators'
   require 'akephalos/page'
   require 'akephalos/node'
 

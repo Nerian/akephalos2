@@ -3,6 +3,17 @@ module Akephalos
   # Akephalos::Page wraps HtmlUnit's HtmlPage class, exposing an API for
   # interacting with a page in the browser.
   class Page
+    
+    class << self
+    
+      alias_method :new_orig, :new
+    
+      def new(*args)
+        ExceptionConvertingDelegator.new(new_orig(*args), "NativeException", RuntimeError)
+      end
+    
+    end
+    
     # @param [HtmlUnit::HtmlPage] page
     def initialize(page)
       @nodes = []

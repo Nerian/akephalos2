@@ -3,6 +3,17 @@ module Akephalos
   # Akephalos::Node wraps HtmlUnit's DOMNode class, providing a simple API for
   # interacting with an element on the page.
   class Node
+    
+    class << self
+    
+      alias_method :new_orig, :new
+    
+      def new(*args)
+        ExceptionConvertingDelegator.new(new_orig(*args), "NativeException", RuntimeError)
+      end
+    
+    end
+
     # @param [HtmlUnit::DOMNode] node
     def initialize(node)
       @nodes = []
