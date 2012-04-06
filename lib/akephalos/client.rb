@@ -22,6 +22,16 @@ else
     # allowing navigation.
     class Client
 
+      class << self
+
+        alias_method :new_orig, :new
+
+        def new(*args)
+          ExceptionConvertingDelegator.new(new_orig(*args), "NativeException", RuntimeError)
+        end
+
+      end
+
       # @return [Akephalos::Page] the current page
       attr_reader :page
 
