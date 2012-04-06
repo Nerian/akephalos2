@@ -8,6 +8,7 @@ else
   require 'akephalos/htmlunit/ext/http_method'
   require 'akephalos/htmlunit/ext/confirm_handler'
 
+  require 'akephalos/exception_handling_delegators'
   require 'akephalos/page'
   require 'akephalos/node'
 
@@ -20,6 +21,16 @@ else
     # point for all interaction with the browser, exposing its current page and
     # allowing navigation.
     class Client
+
+      class << self
+
+        alias_method :new_orig, :new
+
+        def new(*args)
+          ExceptionConvertingDelegator.new(new_orig(*args), "NativeException", RuntimeError)
+        end
+
+      end
 
       # @return [Akephalos::Page] the current page
       attr_reader :page
