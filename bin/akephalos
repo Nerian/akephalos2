@@ -83,6 +83,7 @@ else
 
     java_args = [
      "-Xmx#{options[:akephalos_jvm_max_memory]}M",
+     "-Dfile.encoding=UTF8",
       "-cp", [JRubyJars.core_jar_path, JRubyJars.stdlib_jar_path].join(File::PATH_SEPARATOR),
       "org.jruby.Main",
       "-X+O"
