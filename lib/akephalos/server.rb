@@ -1,4 +1,3 @@
-require "pathname"
 require "drb/drb"
 require "akephalos/client"
 
