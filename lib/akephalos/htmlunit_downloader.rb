@@ -27,7 +27,7 @@ module HtmlUnit
     elsif version == '2.9'
       %x[curl -L -o htmlunit-2.9.zip  http://sourceforge.net/projects/htmlunit/files/htmlunit/2.9/htmlunit-2.9-bin.zip]
     else
-      %x[curl -L -O http://sourceforge.net/projects/htmlunit/files/htmlunit/#{version}/htmlunit-#{version}-bin.zip]
+      %x[curl -L -O htmlunit-#{version}.zip http://sourceforge.net/projects/htmlunit/files/htmlunit/#{version}/htmlunit-#{version}-bin.zip]
     end
   end
 
