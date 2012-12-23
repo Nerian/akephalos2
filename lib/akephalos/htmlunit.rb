@@ -1,4 +1,3 @@
-require "pathname"
 require "java"
 
 Dir["#{Dir.pwd}/.akephalos/#{ENV['htmlunit_version']}/*.jar"].each {|file| require file }
