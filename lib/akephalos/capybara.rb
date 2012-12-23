@@ -338,7 +338,11 @@ class Capybara::Driver::Akephalos < Capybara::Driver::Base
   # @param [String] path
   # @return [String] the absolute URL for the given path
   def url(path)
-    rack_server.url(path)
+    if Capybara.run_server
+      rack_server.url(path)
+    else
+      Capybara.app_host + path
+    end
   end
 
 end
